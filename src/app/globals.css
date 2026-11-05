@@ -1,0 +1,62 @@
+/* Pretendard Variable Font — must precede @import "tailwindcss" */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@import "tailwindcss";
+
+/* ─── Color Tokens ─────────────────────────────── */
+:root {
+  /* Background */
+  --bg-primary:          #FF8000;
+  --bg-primary-soft:     #FFDABC;
+  --bg-primary-softer:   #FFF6EE;
+  --bg-secondary:        #0957C8;
+  --bg-secondary-soft:   #C6E6FF;
+  --bg-secondary-softer: #EFF8FF;
+  --bg-white:            #FBFBFB;
+  --bg-gray:             #F6F6F6;
+  --bg-black:            #1A1A1A;
+
+  /* Text */
+  --txt-display:         #1A1A1A;
+  --txt-heading:         #212121;
+  --txt-body:            #3B3B3B;
+  --txt-label:           #212121;
+  --txt-caption:         #4D4D4D;
+  --txt-caption-soft:    #A6A6A6;
+  --txt-primary:         #FF8000;
+  --txt-white:           #FBFBFB;
+  --txt-black:           #1A1A1A;
+
+  /* Primitive */
+  --gray-050:  #FBFBFB;
+  --gray-100:  #F6F6F6;
+  --gray-500:  #7A7A7A;
+  --gray-800:  #212121;
+  --gray-900:  #1A1A1A;
+  --blue-050:  #EFF8FF;
+
+  /* Border */
+  --border-neutral: #D4D4D4;
+}
+
+/* ─── Base ──────────────────────────────────────── */
+@theme inline {
+  --font-pretendard: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, Roboto, "Helvetica Neue", "Segoe UI", sans-serif;
+}
+
+html {
+  font-family: var(--font-pretendard);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  word-break: keep-all;
+  background: var(--bg-white);
+  color: var(--txt-display);
+  font-family: var(--font-pretendard);
+}
+
+/* Hide scrollbar for horizontal scroll */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

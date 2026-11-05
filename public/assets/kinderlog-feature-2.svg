@@ -1,0 +1,25 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="92.2533" height="60" viewBox="0 0 92.2533 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="step2">
+<rect id="Rectangle 18012" width="80" height="60" rx="6" fill="#FFDABC"/>
+<path id="Polygon 2" d="M50 28.2679C51.3333 29.0378 51.3333 30.9623 50 31.7321L35 40.3923C33.6667 41.1621 32 40.1999 32 38.6603L32 21.3397C32 19.8001 33.6667 18.8379 35 19.6077L50 28.2679Z" fill="#FF8000"/>
+<rect id="Rectangle 18013" x="4.99967" y="52.9997" width="70" height="2" rx="1" fill="#FBFBFB"/>
+<rect id="Rectangle 18015" x="5.43942" y="4.40832" width="2" height="2" rx="1" fill="#FBFBFB"/>
+<rect id="Rectangle 18016" x="8.47478" y="4.36649" width="2" height="2" rx="1" fill="#FBFBFB"/>
+<rect id="Rectangle 18017" x="11.5101" y="4.32465" width="2" height="2" rx="1" fill="#FBFBFB"/>
+<rect id="Rectangle 18014" x="5" y="53" width="9" height="2" rx="1" fill="url(#paint0_linear_0_11)"/>
+<circle id="Ellipse 21" cx="14" cy="54" r="2" fill="#FF8000"/>
+<g id="&#235;&#143;&#139;&#235;&#179;&#180;&#234;&#184;&#176;">
+<circle id="Ellipse 22" opacity="0.4" cx="70.4789" cy="35.898" r="12.9036" fill="white" fill-opacity="0.4"/>
+<path id="Vector" d="M77.2212 32.0743C78.3211 33.1761 78.6218 34.0127 78.8011 35.6808" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#FBFBFB"/>
+<path id="Vector_2" d="M73.7535 28.4845C73.9951 28.5899 74.2325 28.7029 74.4618 28.8273" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke="#FBFBFB"/>
+<path id="Ellipse 24" d="M82.9574 35.8976C82.9574 42.7895 77.3705 48.3765 70.4786 48.3765C63.5867 48.3765 57.9997 42.7895 57.9997 35.8976C57.9997 29.0057 63.5867 23.4187 70.4786 23.4187C77.3705 23.4187 82.9574 29.0057 82.9574 35.8976Z" stroke-width="3" stroke="#4D4D4D"/>
+<path id="Vector 30" d="M87.6833 55.7906L76.9303 45.0376L80.6939 41.2741L91.4469 52.027C92.5222 53.1023 92.5222 54.651 91.4469 55.7906C90.3716 56.9302 88.7586 56.8659 87.6833 55.7906Z" fill="#4D4D4D"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_11" x1="5" y1="54" x2="14" y2="54" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFB779"/>
+<stop offset="1" stop-color="#FF8000"/>
+</linearGradient>
+</defs>
+</svg>
