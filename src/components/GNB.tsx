@@ -73,6 +73,15 @@ const NAV_ITEM_LINKS: Record<string, string> = {
 export default function GNB() {
   const [activeNav, setActiveNav] = useState<string | null>(null);
   const [visible, setVisible] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDrawerItem, setOpenDrawerItem] = useState<string | null>(null);
+
+  // 모바일 드로어 열릴 때 body 스크롤 잠금 + 닫힐 때 아코디언 초기화
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    if (!mobileMenuOpen) setOpenDrawerItem(null);
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -102,6 +111,7 @@ export default function GNB() {
   }, []);
 
   return (
+    <>
     <motion.div
       className="fixed left-0 top-0 z-50 w-full"
       animate={{ y: visible ? 0 : "-110%" }}
@@ -109,12 +119,37 @@ export default function GNB() {
       onMouseLeave={() => setActiveNav(null)}
     >
       <header className="w-full bg-[var(--bg-white)]">
-        <div className="max-w-[1440px] mx-auto w-full relative flex items-center justify-between py-4 px-[64px]">
+        {/* ── Mobile header ── */}
+        <div className="md:hidden flex items-center justify-between py-4 px-6">
+          {/* Logo — left */}
+          <Link href="/">
+            <Image
+              src="/assets/logo-horizontal.svg"
+              alt="문화사"
+              width={150}
+              height={19}
+              priority
+            />
+          </Link>
+          {/* Hamburger */}
+          <button
+            className="flex flex-col justify-center gap-[5px] w-10 h-10 items-center"
+            onClick={() => setMobileMenuOpen((v) => !v)}
+            aria-label="메뉴 열기"
+          >
+            <span className="block w-6 h-[2px] bg-[var(--txt-heading)] rounded-full" />
+            <span className="block w-6 h-[2px] bg-[var(--txt-heading)] rounded-full" />
+            <span className="block w-6 h-[2px] bg-[var(--txt-heading)] rounded-full" />
+          </button>
+        </div>
+
+        {/* ── PC header ── */}
+        <div className="hidden md:flex max-w-[1440px] mx-auto w-full relative items-center justify-between py-4 px-[64px]">
           {/* Logo */}
           <Link href="/">
             <Image
               src="/assets/logo-horizontal.svg"
-              alt="문화사 립스"
+              alt="문화사"
               width={190}
               height={24}
               priority
@@ -151,7 +186,7 @@ export default function GNB() {
         </div>
       </header>
 
-      {/* Sub-menu Drawer */}
+      {/* PC Sub-menu Drawer */}
       <AnimatePresence>
         {activeNav && (
           <motion.div
@@ -181,5 +216,99 @@ export default function GNB() {
         )}
       </AnimatePresence>
     </motion.div>
+
+    {/* Mobile Full-screen Drawer */}
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <motion.div
+          key="mobile-drawer"
+          className="fixed inset-0 z-[60] bg-white flex flex-col md:hidden"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        >
+          {/* Drawer header */}
+          <div className="flex items-center justify-between px-6 py-4">
+            <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+              <Image
+                src="/assets/logo-horizontal.svg"
+                alt="문화사"
+                width={150}
+                height={19}
+                priority
+              />
+            </Link>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="메뉴 닫기"
+              className="w-10 h-10 flex items-center justify-center"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M2 2L18 18M18 2L2 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* Nav list */}
+          <nav className="flex-1 overflow-y-auto px-6 py-4 flex flex-col">
+            {NAV_ITEMS.map((item) => {
+              const isOpen = openDrawerItem === item;
+              return (
+                <div key={item} className="border-b border-[var(--bg-gray)]">
+                  {/* Row: label + chevron */}
+                  <button
+                    className="w-full flex items-center justify-between py-4"
+                    onClick={() => setOpenDrawerItem(isOpen ? null : item)}
+                  >
+                    <span className="text-[18px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-heading)]">
+                      {item}
+                    </span>
+                    <motion.svg
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </motion.svg>
+                  </button>
+                  {/* Sub-items */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        key="sub"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-1 pb-4">
+                          {(MENU[item] ?? []).map((sub) => {
+                            const href = MENU_LINKS[item]?.[sub] ?? "#";
+                            return (
+                              <Link
+                                key={sub}
+                                href={href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="py-2 pl-2 text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-label)] hover:text-[var(--txt-primary)] transition-colors"
+                              >
+                                {sub}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </nav>
+
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }

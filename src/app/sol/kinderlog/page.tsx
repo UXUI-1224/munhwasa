@@ -9,22 +9,28 @@ import Footer from "@/components/Footer";
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-function DesktopHero() {
+function Hero() {
   const [animDone, setAnimDone] = useState(false);
-  const progress = useMotionValue(0);
+  const progress    = useMotionValue(0);
+  const isMobileRef = useRef(false);
 
-  const imageTop   = useTransform(progress, [0, 1],    ["365px", "0px"]);
-  const imageLeft  = useTransform(progress, [0, 1],    ["240px", "0px"]);
-  const imageRight = useTransform(progress, [0, 1],    ["240px", "0px"]);
-  const imageBR    = useTransform(progress, [0, 0.76], ["24px",  "0px"]);
-  const preTextOp  = useTransform(progress, [0, 0.56], [1, 0]);
-  const postTextOp = useTransform(progress, [0.5, 1],  [0, 1]);
+  const imageTop   = useTransform(progress, (p) => `${(isMobileRef.current ? 300 : 365) * (1 - p)}px`);
+  const imageSide  = useTransform(progress, (p) => `${(isMobileRef.current ? 16  : 240) * (1 - p)}px`);
+  const imageBR    = useTransform(progress, (p) => `${Math.max(0, 24 * (1 - Math.min(1, p / 0.76)))}px`);
+  const preTextOp  = useTransform(progress, (p) => Math.max(0, 1 - p / 0.56));
+  const postTextOp = useTransform(progress, (p) => Math.max(0, (p - 0.5) / 0.5));
 
   useEffect(() => {
-    const TOTAL = 500;
-    let acc = 0;
+    const WHEEL_TOTAL = 500;
+    const TOUCH_TOTAL = 400;
+    let p = 0;
     let locked = true;
     let cooldown = false;
+    let touchStartY = 0;
+
+    function checkMobile() { isMobileRef.current = window.innerWidth < 768; }
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
     function lock() {
       const sw = window.innerWidth - document.documentElement.clientWidth;
@@ -35,36 +41,62 @@ function DesktopHero() {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
-
     lock();
 
     function onWheel(e: WheelEvent) {
       if (locked) {
         e.preventDefault();
-        acc = Math.max(0, Math.min(TOTAL, acc + e.deltaY));
-        progress.set(acc / TOTAL);
-        if (acc >= TOTAL) {
-          locked = false;
-          unlock();
-          setAnimDone(true);
-          cooldown = true;
-          setTimeout(() => { cooldown = false; }, 500);
+        p = Math.max(0, Math.min(1, p + e.deltaY / WHEEL_TOTAL));
+        progress.set(p);
+        if (p >= 1) {
+          locked = false; unlock(); setAnimDone(true);
+          cooldown = true; setTimeout(() => { cooldown = false; }, 500);
         }
       } else {
         if (cooldown) { e.preventDefault(); return; }
         if (window.scrollY <= 1 && e.deltaY < 0) {
           e.preventDefault();
-          locked = true;
-          lock();
-          setAnimDone(false);
-          acc = Math.max(0, Math.min(TOTAL, acc + e.deltaY));
-          progress.set(acc / TOTAL);
+          locked = true; lock(); setAnimDone(false);
+          p = Math.max(0, Math.min(1, p + e.deltaY / WHEEL_TOTAL));
+          progress.set(p);
         }
       }
     }
 
-    window.addEventListener("wheel", onWheel, { passive: false });
-    return () => { window.removeEventListener("wheel", onWheel); unlock(); };
+    function onTouchStart(e: TouchEvent) { touchStartY = e.touches[0].clientY; }
+
+    function onTouchMove(e: TouchEvent) {
+      const delta = touchStartY - e.touches[0].clientY;
+      touchStartY = e.touches[0].clientY;
+      if (locked) {
+        e.preventDefault();
+        p = Math.max(0, Math.min(1, p + delta / TOUCH_TOTAL));
+        progress.set(p);
+        if (p >= 1) {
+          locked = false; unlock(); setAnimDone(true);
+          cooldown = true; setTimeout(() => { cooldown = false; }, 500);
+        }
+      } else {
+        if (cooldown) { e.preventDefault(); return; }
+        if (window.scrollY <= 1 && delta < -4) {
+          e.preventDefault();
+          locked = true; lock(); setAnimDone(false);
+          p = Math.max(0, Math.min(1, p + delta / TOUCH_TOTAL));
+          progress.set(p);
+        }
+      }
+    }
+
+    window.addEventListener("wheel",      onWheel,      { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true  });
+    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    return () => {
+      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove",  onTouchMove);
+      window.removeEventListener("resize",     checkMobile);
+      unlock();
+    };
   }, [progress]);
 
   return (
@@ -73,77 +105,77 @@ function DesktopHero() {
         className="overflow-hidden bg-[var(--bg-white)]"
         style={animDone ? { position: "absolute", inset: 0 } : { position: "fixed", inset: 0, zIndex: 40 }}
       >
-        {/* Background image */}
         <motion.div
           className="absolute overflow-hidden"
-          style={{ top: imageTop, left: imageLeft, right: imageRight, bottom: "0px", borderRadius: imageBR }}
+          style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
           <Image src="/assets/kinderlog-hero.png" alt="킨더로그" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
         </motion.div>
 
-        {/* Pre-text: dark, before image expands — left/right layout matching Figma */}
+        {/* Pre-text */}
         <motion.div
-          className="absolute top-[120px] left-[240px] right-[240px] flex items-end justify-between pointer-events-none"
+          className="absolute top-[120px] left-0 right-0 pointer-events-none"
           style={{ opacity: preTextOp }}
         >
-          <div className="flex flex-col gap-6 w-[464px] shrink-0">
-            <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]">
-              Solution
-            </p>
-            <div className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
-              <p>AI 스마트 보육 솔루션</p>
-              <p>킨더로그를 소개합니다.</p>
-            </div>
+          {/* Mobile: label + title centered */}
+          <div className="flex md:hidden flex-col items-center gap-4 px-6">
+            <p className="text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]">Solution</p>
+            <h1 className="text-[36px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] text-center">
+              AI 스마트 보육 솔루션<br />킨더로그를 소개합니다.
+            </h1>
           </div>
-          <div className="w-[830px] shrink-0">
-            <div className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
-              <p>원 안의 AI 카메라가 아이들의 하루를 관찰해,</p>
-              <p>알림장·일지 초안, 행동발달·행정일지 리포트 생성 등 원의 스마트한 운영을 돕는 AI 기반 보육 솔루션입니다.</p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Post-text: white, after image expands — vertically centered */}
-        <motion.div
-          className="absolute inset-0 flex items-center pointer-events-none z-10"
-          style={{ opacity: postTextOp }}
-        >
-          <div className="w-full px-[240px] flex items-end justify-between">
+          {/* Desktop: left-right layout */}
+          <div className="hidden md:flex items-end justify-between pl-[240px] pr-[240px]">
             <div className="flex flex-col gap-6 w-[464px] shrink-0">
-              <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--bg-primary)]">
-                Solution
-              </p>
-              <div className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-white)]">
+              <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]">Solution</p>
+              <div className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
                 <p>AI 스마트 보육 솔루션</p>
                 <p>킨더로그를 소개합니다.</p>
               </div>
             </div>
             <div className="w-[830px] shrink-0">
-              <div className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-white)]">
+              <div className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
                 <p>원 안의 AI 카메라가 아이들의 하루를 관찰해,</p>
                 <p>알림장·일지 초안, 행동발달·행정일지 리포트 생성 등 원의 스마트한 운영을 돕는 AI 기반 보육 솔루션입니다.</p>
               </div>
             </div>
           </div>
         </motion.div>
+
+        {/* Post-text */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none z-10"
+          style={{ opacity: postTextOp }}
+        >
+          {/* Mobile: centered */}
+          <div className="flex md:hidden flex-col items-center justify-center h-full gap-4 px-6">
+            <p className="text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--bg-primary)]">Solution</p>
+            <h1 className="text-[36px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] text-center">
+              AI 스마트 보육 솔루션<br />킨더로그를 소개합니다.
+            </h1>
+          </div>
+          {/* Desktop: left-right layout */}
+          <div className="hidden md:flex items-center h-full">
+            <div className="max-w-[1440px] mx-auto w-full px-6 flex items-end justify-between">
+              <div className="flex flex-col gap-6 w-[464px] shrink-0">
+                <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--bg-primary)]">Solution</p>
+                <div className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-white)]">
+                  <p>AI 스마트 보육 솔루션</p>
+                  <p>킨더로그를 소개합니다.</p>
+                </div>
+              </div>
+              <div className="w-[830px] shrink-0">
+                <div className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-white)]">
+                  <p>원 안의 AI 카메라가 아이들의 하루를 관찰해,</p>
+                  <p>알림장·일지 초안, 행동발달·행정일지 리포트 생성 등 원의 스마트한 운영을 돕는 AI 기반 보육 솔루션입니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </section>
     </div>
-  );
-}
-
-function MobileHero() {
-  return (
-    <section className="relative w-full h-[70vh] min-h-[480px] overflow-hidden">
-      <Image src="/assets/kinderlog-hero.png" alt="킨더로그" fill className="object-cover" priority />
-      <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 pt-[72px] gap-4">
-        <p className="text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--bg-primary)]">Solution</p>
-        <h1 className="text-[32px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] text-center">
-          AI 스마트 보육 솔루션<br />킨더로그를 소개합니다.
-        </h1>
-      </div>
-    </section>
   );
 }
 
@@ -216,14 +248,51 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
         className="bg-[var(--bg-gray)] w-full flex flex-col justify-center"
         style={fixed ? { position: "fixed", inset: 0, zIndex: 40 } : { position: "absolute", inset: 0 }}
       >
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col gap-10">
-          <h2 className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
+        <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-10">
+          <h2 className="text-[22px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
             {title}
           </h2>
 
           <div className="flex flex-col gap-6">
-            {/* Step indicator */}
-            <div className="relative h-6 w-full">
+            {/* Mobile: vertical track + stacked labels */}
+            <div className="flex md:hidden gap-4">
+              <div className="relative w-6 shrink-0">
+                <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-[#E8E8E8] rounded-full" />
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-[var(--bg-primary)] rounded-full"
+                  style={{ height: `${progress * 100}%` }}
+                />
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 w-6 h-6"
+                  style={{ top: `clamp(0px, calc(${progress * 100}% - 12px), calc(100% - 24px))` }}
+                >
+                  <Image src="/assets/sol-step-bullet.svg" alt="" fill />
+                </div>
+              </div>
+              <div className="flex-1 flex flex-col gap-6">
+                {steps.map((step, i) => (
+                  <div key={i} className="flex flex-col gap-1">
+                    <p className="text-[16px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
+                      {step.title}
+                    </p>
+                    {Array.isArray(step.desc)
+                      ? step.desc.map((line, j) => (
+                          <p key={j} className="text-[14px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">
+                            {line}
+                          </p>
+                        ))
+                      : (
+                          <p className="text-[14px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">
+                            {step.desc}
+                          </p>
+                        )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop: horizontal track */}
+            <div className="hidden md:block relative h-6 w-full">
               <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-[#E8E8E8] rounded-full" />
               <div
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--bg-primary)] rounded-full"
@@ -237,10 +306,10 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
               </div>
             </div>
 
-            {/* Step labels */}
-            <div className="flex gap-6">
+            {/* Desktop: 4-col labels */}
+            <div className="hidden md:grid md:grid-cols-4 gap-6">
               {steps.map((step, i) => (
-                <div key={i} className="flex-1 flex flex-col gap-2">
+                <div key={i} className="flex flex-col gap-2">
                   <p className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
                     {step.title}
                   </p>
@@ -334,28 +403,25 @@ export default function KinderlogPage() {
       <GNB />
       <main className="flex flex-col w-full">
         {/* Hero */}
-        <div className="lg:hidden"><MobileHero /></div>
-        <div className="hidden lg:block"><DesktopHero /></div>
+        <Hero />
 
         {/* Feature section */}
-        <section className="w-full bg-white py-[120px]">
-          <div className="max-w-[1440px] mx-auto w-full flex items-start justify-between gap-16">
-            {/* Left: title + link */}
-            <div className="sticky top-24 flex flex-col gap-6 shrink-0">
-              <div className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
+        <section className="w-full bg-white py-16 md:py-[120px]">
+          <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col md:flex-row items-start justify-between gap-8 md:gap-16">
+            {/* Left: title */}
+            <div className="flex flex-col gap-4 md:gap-6 shrink-0 md:sticky md:top-24">
+              <div className="text-[22px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
                 <p>설치는 간단하게,</p>
                 <p>분석은 우리 원 안에서만.</p>
-              </div>
-              <div className="flex items-center gap-1 text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-label)]">
               </div>
             </div>
 
             {/* Right: 3 feature icons */}
-            <div className="flex gap-6 w-[830px] shrink-0">
+            <div className="flex flex-col md:flex-row gap-12 md:gap-6 w-full md:w-[830px] md:shrink-0">
               {KINDERLOG_FEATURES.map((f, i) => (
                 <motion.div
                   key={i}
-                  className="flex-1 flex flex-col justify-between h-[195px]"
+                  className="flex flex-row md:flex-col gap-4 md:gap-0 items-center md:items-start md:justify-between md:flex-1 md:h-[195px]"
                   initial={{ opacity: 0, scale: 0.65, y: 24 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -365,11 +431,11 @@ export default function KinderlogPage() {
                     <Image src={f.icon} alt={f.title} fill />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
+                    <p className="text-[18px] md:text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)]">
                       {f.title}
                     </p>
                     {f.desc.map((line, j) => (
-                      <p key={j} className="text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">
+                      <p key={j} className="text-[14px] md:text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">
                         {line}
                       </p>
                     ))}
@@ -384,15 +450,15 @@ export default function KinderlogPage() {
         <StepSection title="킨더로그 도입은 이렇게 진행됩니다." steps={KINDERLOG_STEPS} />
 
         {/* Benefits section */}
-        <section className="w-full bg-white py-[120px]">
-          <div className="max-w-[1440px] mx-auto w-full flex gap-6 items-start">
+        <section className="w-full bg-white py-16 md:py-[120px]">
+          <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col md:flex-row gap-8 md:gap-6 items-start">
             {/* Left: title + mascot */}
-            <div className="flex flex-col justify-between self-stretch shrink-0 w-[342px]">
-              <div className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
+            <div className="flex flex-col gap-4 md:gap-0 md:justify-between md:self-stretch shrink-0 w-full md:w-[342px]">
+              <div className="text-[22px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
                 <p>킨더로그를 통해</p>
                 <p>무엇을 얻을 수 있나요?</p>
               </div>
-              <div className="flex flex-col items-start">
+              <div className="hidden md:flex flex-col items-start">
                 {/* Balloon */}
                 <div className="relative inline-flex flex-col gap-0.5 bg-[var(--bg-secondary-soft)] rounded-full px-6 py-4">
                   <p className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-caption)]">기록이 가벼워지면,</p>
@@ -415,17 +481,18 @@ export default function KinderlogPage() {
             </div>
 
             {/* Right: 3 cards */}
-            <div className="flex flex-1 gap-6">
+            <div className="flex flex-col md:flex-row md:flex-1 gap-4 md:gap-6">
               {KINDERLOG_BENEFITS.map((card, i) => (
                 <motion.div
                   key={i}
-                  className="flex-1 flex flex-col justify-between h-[342px] bg-[var(--bg-gray)] rounded-3xl p-6"
+                  className="flex flex-row md:flex-col gap-4 md:gap-0 md:flex-1 md:justify-between md:h-[342px] bg-[var(--bg-gray)] rounded-3xl p-6"
                   initial={{ opacity: 0, y: 32, scale: 0.92 }}
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 240, damping: 20, delay: i * 0.13 }}
                 >
                   <motion.div
+                    className="shrink-0"
                     initial={{ scale: 0.5, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
@@ -434,8 +501,8 @@ export default function KinderlogPage() {
                     {card.graphic}
                   </motion.div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-black">{card.title}</p>
-                    <p className="text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">{card.desc}</p>
+                    <p className="text-[18px] md:text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-black">{card.title}</p>
+                    <p className="text-[14px] md:text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]">{card.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -445,19 +512,19 @@ export default function KinderlogPage() {
 
         {/* CTA Banner */}
         <section
-          className="relative w-full py-[120px] flex flex-col items-center justify-center gap-6 text-center overflow-hidden"
+          className="relative w-full px-[40px] py-16 md:py-[120px] flex flex-col items-center justify-center gap-6 text-center overflow-hidden"
           style={{ background: "linear-gradient(90deg, #3D1B08 0%, #0957C8 100%)" }}
         >
           <Image src="/assets/sol-banner-bg.svg" alt="" fill className="object-cover pointer-events-none" />
-          <h2 className="text-[48px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)]">
+          <h2 className="text-[24px] md:text-[48px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] px-6">
             킨더로그를 통해<br />스마트하게 운영하세요
           </h2>
-          <p className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-white)] opacity-80">
+          <p className="text-[14px] md:text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-white)] opacity-80 px-6">
             우리 어린이집과 유치원에 지금 바로 킨더로그를 도입해보세요
           </p>
           <Link
             href="/contact?tab=institution"
-            className="mt-2 inline-flex items-center px-6 py-4 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
+            className="mt-2 inline-flex items-center px-4 py-3 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
           >
             도입 상담
           </Link>

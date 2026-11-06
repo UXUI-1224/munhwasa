@@ -12,13 +12,13 @@ export default function NewsPage() {
       <GNB />
       <main className="flex flex-col w-full">
         {/* SubHero */}
-        <section className="w-full pt-[120px] pb-[80px] bg-[var(--bg-white)]">
+        <section className="w-full pt-[80px] md:pt-[120px] bg-[var(--bg-white)]">
           <div className="max-w-[1440px] mx-auto w-full px-6 flex items-end justify-between gap-6">
             <div className="flex flex-col gap-6 shrink-0 w-[464px]">
               <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]">
                 NEWS
               </p>
-              <h1 className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
+              <h1 className="text-[28px] md:text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
                 문화사 소식
               </h1>
             </div>
@@ -31,7 +31,7 @@ export default function NewsPage() {
         </section>
 
         {/* Board Table */}
-        <section className="w-full bg-white pb-[160px] pt-[96px]">
+        <section className="w-full pt-[60px] pb-[120px] md:py-[120px]">
           <div className="max-w-[1440px] mx-auto w-full px-6">
             <div className="flex flex-col w-full">
               {/* Header */}
@@ -46,7 +46,7 @@ export default function NewsPage() {
                     제목
                   </p>
                 </div>
-                <div className="flex items-center justify-center w-[150px] h-12 py-3">
+                <div className="flex items-center justify-center w-[80px] md:w-[150px] h-12 py-3">
                   <p className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-label)]">
                     작성시간
                   </p>
@@ -72,7 +72,7 @@ export default function NewsPage() {
                       {post.title}
                     </p>
                   </div>
-                  <div className="flex items-center justify-center w-[150px] p-6">
+                  <div className="flex items-center justify-center w-[80px] md:w-[150px] p-6">
                     <p className="text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[#A6A6A6]">
                       {post.date}
                     </p>

@@ -35,7 +35,7 @@ function ProductCard({ img, name, desc, price, onClick }: {
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="relative w-full aspect-[377/278] rounded-[16px] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden">
         <Image src={img} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
       </div>
       <div className="flex flex-col gap-4">
@@ -59,9 +59,10 @@ export default function StoreContents() {
       <GNB />
 
       {/* ── Hero Banner ───────────────────────────────────────────────────── */}
-      <section className="pt-[80px] px-[240px]">
+      <section className="pt-[80px] md:pt-[120px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6">
         <div
-          className="relative h-[524px] rounded-[24px] overflow-hidden flex items-center p-[80px]"
+          className="relative h-[524px] rounded-[24px] overflow-hidden flex items-end md:items-center p-[24px] md:p-[80px]"
         >
           <Image
             src="/assets/store-edu-hero.png"
@@ -76,23 +77,26 @@ export default function StoreContents() {
               우리 아이 식습관 교육 콘텐츠
             </p>
             <p className="text-[18px] font-normal leading-[1.6] tracking-[-0.04em] text-[#F6F6F6]">
-              우리 아이의 건강한 식습관을 위한 교육 콘텐츠 출시!
+              우리 아이의 건강한 식습관을 위한<br className="md:hidden" /> 교육 콘텐츠 출시!
             </p>
           </div>
+        </div>
         </div>
       </section>
 
       {/* ── Product Grid ──────────────────────────────────────────────────── */}
-      <section className="px-[240px] py-[160px]">
-        <div className="grid grid-cols-4 gap-6">
-          {PRODUCTS.map((p) => (
-            <ProductCard key={p.name} {...p} onClick={() => setPopupOpen(true)} />
-          ))}
+      <section className="pt-[60px] pb-[120px] md:py-[120px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {PRODUCTS.map((p) => (
+              <ProductCard key={p.name} {...p} onClick={() => setPopupOpen(true)} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── Color Me Out Section ──────────────────────────────────────────── */}
-      <section className="relative w-full overflow-hidden flex items-center justify-between px-[240px] py-[80px]">
+      <section className="relative w-full overflow-hidden py-[80px]">
         {/* Background image */}
         <Image
           src="/assets/store-edu-section-bg.png"
@@ -100,6 +104,7 @@ export default function StoreContents() {
           fill
           className="object-cover object-center"
         />
+        <div className="max-w-[1440px] mx-auto w-full px-6 flex items-center justify-between">
 
         {/* Left text */}
         <motion.div
@@ -175,6 +180,7 @@ export default function StoreContents() {
             />
           </div>
         </motion.div>
+        </div>
       </section>
 
       <Footer />

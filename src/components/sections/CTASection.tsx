@@ -26,7 +26,7 @@ export default function CTASection() {
   });
 
   return (
-    <section className="relative w-full bg-[var(--bg-secondary)] py-[80px] overflow-hidden">
+    <section className="relative w-full bg-[var(--bg-secondary)] pt-[80px] pb-[240px] md:py-[80px] overflow-hidden">
       {/* Watermark logo */}
       <Image
         src="/assets/logo-watermark.svg"
@@ -36,11 +36,11 @@ export default function CTASection() {
         className="absolute bottom-0 left-0 pointer-events-none opacity-100"
       />
 
-      <div className="max-w-[1440px] mx-auto w-full relative flex items-center justify-between z-10">
+      <div className="max-w-[1440px] mx-auto w-full px-6 flex md:items-center md:justify-between">
         {/* Left: Text + CTA */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 relative z-10">
           <motion.h2
-            className="text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)]"
+            className="text-[28px] lg:text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)]"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true }}
@@ -60,8 +60,8 @@ export default function CTASection() {
           </motion.a>
         </div>
 
-        {/* Right: Character graphic — inlined SVG for per-element animation */}
-        <div ref={graphicRef} className="relative shrink-0 w-[464px] h-[350px] overflow-hidden">
+        {/* Right: Character graphic — absolute on mobile, static on desktop */}
+        <div ref={graphicRef} className="absolute right-[24px] bottom-[80px] w-[464px] h-[350px] overflow-hidden pointer-events-none scale-[0.43] origin-bottom-right md:static md:scale-100 md:shrink-0 md:w-[464px] md:h-[350px]">
           <svg
             width="496"
             height="362"

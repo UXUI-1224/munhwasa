@@ -410,147 +410,237 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section
-      className="relative w-full bg-[var(--bg-gray)] overflow-hidden"
-      style={{ aspectRatio: `${DESIGN_W} / ${DESIGN_H}` }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: DESIGN_W,
-          height: DESIGN_H,
-          transformOrigin: "top left",
-          transform: "scale(var(--hw-scale, 1))",
-        }}
+    <>
+      {/* ── PC Hero (md+) ───────────────────────────────────────────────────── */}
+      <section
+        className="hidden md:block relative w-full bg-[var(--bg-gray)] overflow-hidden"
+        style={{ aspectRatio: `${DESIGN_W} / ${DESIGN_H}` }}
       >
         <div
-          className="absolute left-1/2 top-1/2 flex flex-col items-center gap-16"
           style={{
-            width: 1329,
-            transform: "translate(-50%, calc(-50% + 37px))",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: DESIGN_W,
+            height: DESIGN_H,
+            transformOrigin: "top left",
+            transform: "scale(var(--hw-scale, 1))",
           }}
         >
-          {/* ── Display text ─────────────────────────────────── */}
-          <div className="flex flex-col items-center gap-8 w-full">
+          <div
+            className="absolute left-1/2 top-1/2 flex flex-col items-center gap-16"
+            style={{
+              width: 1329,
+              transform: "translate(-50%, calc(-50% + 37px))",
+            }}
+          >
+            {/* ── Display text ─────────────────────────────────── */}
+            <div className="flex flex-col items-center gap-8 w-full">
 
-            {/* Line 1 */}
-            <div className="flex items-center gap-4 justify-center">
-              {/* Yellow pill: clip-path reveal L→R */}
-              <motion.div
-                className="shrink-0"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.75, ease: revealEase, delay: T.yellowPillReveal }}
-              >
-                <YellowPill animDelay={T.yellowPillAnim} />
-              </motion.div>
+              {/* Line 1 */}
+              <div className="flex items-center gap-4 justify-center">
+                <motion.div
+                  className="shrink-0"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.75, ease: revealEase, delay: T.yellowPillReveal }}
+                >
+                  <YellowPill animDelay={T.yellowPillAnim} />
+                </motion.div>
 
-              {/* "아이의 하루를": clip-path reveal L→R */}
-              <motion.span
-                className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.65, ease: revealEase, delay: T.textHaru }}
-              >
-                아이의 하루를
-              </motion.span>
+                <motion.span
+                  className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.65, ease: revealEase, delay: T.textHaru }}
+                >
+                  아이의 하루를
+                </motion.span>
 
-              {/* Blue pill: clip-path reveal L→R */}
-              <motion.div
-                className="shrink-0"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.75, ease: revealEase, delay: T.bluePillReveal }}
-              >
-                <BluePill animDelay={T.bluePillAnim} />
-              </motion.div>
+                <motion.div
+                  className="shrink-0"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.75, ease: revealEase, delay: T.bluePillReveal }}
+                >
+                  <BluePill animDelay={T.bluePillAnim} />
+                </motion.div>
 
-              {/* "관찰하고": clip-path reveal L→R */}
-              <motion.span
-                className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.6, ease: revealEase, delay: T.textGwanchal }}
-              >
-                관찰하고
-              </motion.span>
+                <motion.span
+                  className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.6, ease: revealEase, delay: T.textGwanchal }}
+                >
+                  관찰하고
+                </motion.span>
+              </div>
+
+              {/* Line 2 */}
+              <div className="flex items-center gap-4 justify-center">
+                <motion.span
+                  className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.65, ease: revealEase, delay: T.textConnect }}
+                >
+                  기관과 가정을
+                </motion.span>
+
+                <motion.span
+                  className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.65, ease: revealEase, delay: T.textConnect + 0.2 }}
+                >
+                  연결
+                </motion.span>
+
+                <motion.div
+                  className="shrink-0"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.75, ease: revealEase, delay: T.greenPillReveal }}
+                >
+                  <GreenPill animDelay={T.greenPillAnim} />
+                </motion.div>
+
+                <motion.span
+                  className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
+                  initial={{ clipPath: "inset(0 100% 0 0)" }}
+                  animate={{ clipPath: "inset(0 0% 0 0)" }}
+                  transition={{ duration: 0.65, ease: revealEase, delay: T.textEnd }}
+                >
+                  합니다.
+                </motion.span>
+              </div>
             </div>
 
-            {/* Line 2 */}
-            <div className="flex items-center gap-4 justify-center">
-              <motion.span
-                className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.65, ease: revealEase, delay: T.textConnect }}
-              >
-                기관과 가정을
-              </motion.span>
+            {/* ── Description ──────────────────────────────────── */}
+            <motion.p
+              className="text-[30px] font-medium leading-[1.4] tracking-[-0.06em] text-[var(--txt-heading)] text-center whitespace-pre-line"
+              initial={{ clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)" }}
+              transition={{ duration: 0.9, ease: revealEase, delay: T.desc }}
+            >
+              {`AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로\n영유아 교육기관의 운영과 아이의 성장을 지원합니다.`}
+            </motion.p>
 
-              <motion.span
-                className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.65, ease: revealEase, delay: T.textConnect + 0.2 }}
+            {/* ── CTA Buttons ──────────────────────────────────── */}
+            <motion.div
+              className="flex items-center gap-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, ease: revealEase, delay: T.cta1 }}
+            >
+              <a
+                href="/experience/hiforest"
+                className="flex items-center justify-center gap-2 min-w-[200px] px-4 py-4 rounded-full bg-[var(--bg-primary-softer)] text-[18px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)] hover:bg-[#FFE9D4] transition-colors"
               >
-                연결
-              </motion.span>
-
-              {/* Green pill: clip-path reveal L→R */}
-              <motion.div
-                className="shrink-0"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.75, ease: revealEase, delay: T.greenPillReveal }}
+                체험/행사 보기
+              </a>
+              <a
+                href="/contact?tab=institution"
+                className="flex items-center justify-center gap-2 min-w-[200px] px-4 py-4 rounded-full bg-[var(--bg-primary)] text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
               >
-                <GreenPill animDelay={T.greenPillAnim} />
-              </motion.div>
-
-              <motion.span
-                className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap"
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                animate={{ clipPath: "inset(0 0% 0 0)" }}
-                transition={{ duration: 0.65, ease: revealEase, delay: T.textEnd }}
-              >
-                합니다.
-              </motion.span>
-            </div>
+                기관 도입 상담
+              </a>
+            </motion.div>
           </div>
+        </div>
+      </section>
 
-          {/* ── Description: clip-path reveal L→R ────────────── */}
-          <motion.p
-            className="text-[30px] font-medium leading-[1.4] tracking-[-0.06em] text-[var(--txt-heading)] text-center whitespace-pre-line"
+      {/* ── Mobile Hero (< md) ──────────────────────────────────────────────── */}
+      <section
+        className="md:hidden relative w-full bg-[var(--bg-gray)] flex flex-col px-6 py-10 gap-6"
+        style={{ minHeight: "100svh" }}
+      >
+        {/* Pills + Text */}
+        <div className="flex flex-col gap-4 flex-1 justify-center">
+
+          {/* 아이의 하루를 + YellowPill (한 줄) */}
+          <motion.div
+            className="flex items-center gap-3 overflow-hidden"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             animate={{ clipPath: "inset(0 0% 0 0)" }}
-            transition={{ duration: 0.9, ease: revealEase, delay: T.desc }}
+            transition={{ duration: 0.75, ease: revealEase, delay: 0 }}
           >
-            {`AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로\n영유아 교육기관의 운영과 아이의 성장을 지원합니다.`}
-          </motion.p>
-
-          {/* ── CTA Buttons: simultaneous fade in ───────────── */}
-          <motion.div
-            className="flex items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, ease: revealEase, delay: T.cta1 }}
-          >
-            <a
-              href="#"
-              className="flex items-center justify-center gap-2 min-w-[200px] px-4 py-4 rounded-full bg-[var(--bg-primary-softer)] text-[18px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)] hover:bg-[#FFE9D4] transition-colors"
-            >
-              체험/행사 보기
-            </a>
-            <a
-              href="/contact?tab=institution"
-              className="flex items-center justify-center gap-2 min-w-[200px] px-4 py-4 rounded-full bg-[var(--bg-primary)] text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
-            >
-              기관 도입 상담
-            </a>
+            <span className="text-[28px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap shrink-0">
+              아이의 하루를
+            </span>
+            <div style={{ width: 173, height: 52, overflow: "hidden", flexShrink: 0 }}>
+              <div style={{ transformOrigin: "top left", transform: "scale(0.52)", width: 333, height: 100 }}>
+                <YellowPill animDelay={0.6} />
+              </div>
+            </div>
           </motion.div>
+
+          {/* 관찰하고 + BluePill (한 줄) */}
+          <motion.div
+            className="flex items-center gap-3 overflow-hidden"
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={{ clipPath: "inset(0 0% 0 0)" }}
+            transition={{ duration: 0.75, ease: revealEase, delay: 0.6 }}
+          >
+            <span className="text-[28px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-nowrap shrink-0">
+              관찰하고
+            </span>
+            <div style={{ width: 173, height: 52, overflow: "hidden", flexShrink: 0 }}>
+              <div style={{ transformOrigin: "top left", transform: "scale(0.52)", width: 333, height: 100 }}>
+                <BluePill animDelay={1.2} />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* 기관과 가정을 연결합니다. + GreenPill (한 줄) */}
+          <motion.div
+            className="flex items-center gap-3 overflow-hidden"
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={{ clipPath: "inset(0 0% 0 0)" }}
+            transition={{ duration: 0.75, ease: revealEase, delay: 1.2 }}
+          >
+            <span className="text-[28px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] whitespace-pre-line shrink-0">
+              {"기관과 가정을\n연결합니다."}
+            </span>
+            <div style={{ width: 173, height: 52, overflow: "hidden", flexShrink: 0 }}>
+              <div style={{ transformOrigin: "top left", transform: "scale(0.52)", width: 333, height: 100 }}>
+                <GreenPill animDelay={1.8} />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            className="text-[20px] font-medium leading-[1.6] tracking-[-0.04em] text-[var(--txt-heading)] whitespace-pre-line overflow-hidden mt-2"
+            initial={{ clipPath: "inset(0 100% 0 0)" }}
+            animate={{ clipPath: "inset(0 0% 0 0)" }}
+            transition={{ duration: 0.9, ease: revealEase, delay: 2.0 }}
+          >
+            {"AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로\n영유아 교육기관의 운영과 아이의 성장을 지원합니다."}
+          </motion.p>
         </div>
-      </div>
-    </section>
+
+        {/* CTA */}
+        <motion.div
+          className="flex flex-col gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, ease: revealEase, delay: 2.6 }}
+        >
+          <a
+            href="/experience/hiforest"
+            className="flex items-center justify-center py-4 rounded-full bg-[var(--bg-primary-softer)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]"
+          >
+            체험/행사 보기
+          </a>
+          <a
+            href="/contact?tab=institution"
+            className="flex items-center justify-center py-4 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)]"
+          >
+            기관 도입 상담
+          </a>
+        </motion.div>
+      </section>
+    </>
   );
 }

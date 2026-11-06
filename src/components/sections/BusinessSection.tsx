@@ -1,14 +1,9 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
 
 const ease: [number, number, number, number] = [0.4, 0, 0.2, 1];
-
-const arrowVariants = {
-  rest: { x: 0 },
-  hover: { x: 4 },
-};
 
 // 카드 1·3: y + rotate
 const charVariants = {
@@ -21,7 +16,6 @@ const charVariantsFlipped = {
   rest:  { y: 0,   rotate: 12, scaleX: -1 },
   hover: { y: -24, rotate: 0,  scaleX: -1 },
 };
-
 
 type CardData = {
   title: string;
@@ -37,10 +31,27 @@ function BusinessCard({
   char,
   index,
 }: CardData & { index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [mobileActive, setMobileActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (window.innerWidth >= 768) return; // 모바일에서만
+        setMobileActive(entry.isIntersecting);
+      },
+      { threshold: 0.55 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div
-      className={`relative overflow-hidden rounded-2xl flex-1 min-w-0 ${bg}`}
-      style={{ aspectRatio: "3 / 4" }}
+      ref={ref}
+      className={`relative overflow-hidden rounded-2xl w-full md:flex-1 md:min-w-0 aspect-[4/3] md:aspect-[3/4] ${bg}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -48,18 +59,18 @@ function BusinessCard({
     >
       {/* hover host — "hover" variant 하위로 전파 */}
       <motion.div
-        className="relative flex flex-col justify-between h-full p-8"
+        className="relative flex flex-col justify-between h-full p-6 md:p-8"
         initial="rest"
         whileHover="hover"
-        animate="rest"
+        animate={mobileActive ? "hover" : "rest"}
       >
         {/* 텍스트 */}
-        <div className="flex flex-col gap-3">
-          <p className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
+        <div className="flex flex-col gap-2 md:gap-3">
+          <p className="text-[20px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
             {title}
           </p>
           <p
-            className="text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]"
+            className="text-[14px] md:text-[16px] font-normal leading-[1.4] tracking-[-0.02em] text-[var(--txt-body)]"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         </div>
@@ -83,12 +94,12 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-1.svg" alt="" width={200} height={200} />
+        <Image src="/assets/character-1.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
 
-  /* ── 카드 2 · 교육 및 코칭 (좌우반전) ───────────────────── */
+  /* ── 카드 2 · 교육 및 코칭 ───────────────────────────── */
   {
     title: "교육 및 코칭",
     description:
@@ -101,7 +112,7 @@ const CARDS: CardData[] = [
         variants={charVariantsFlipped}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-2.svg" alt="" width={200} height={200} />
+        <Image src="/assets/character-2.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
@@ -119,12 +130,12 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-3.svg" alt="" width={200} height={200} />
+        <Image src="/assets/character-3.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
 
-  /* ── 카드 4 · 교육 및 콘텐츠 (복합 그래픽) ───────────────── */
+  /* ── 카드 4 · 교육 및 콘텐츠 ───────────────────────────── */
   {
     title: "교육 및 콘텐츠",
     description:
@@ -137,7 +148,7 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-4.svg" alt="" width={200} height={200} />
+        <Image src="/assets/character-4.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
@@ -145,12 +156,12 @@ const CARDS: CardData[] = [
 
 export default function BusinessSection() {
   return (
-    <section className="w-full py-[160px] bg-[var(--bg-white)]">
-      <div className="max-w-[1440px] mx-auto w-full flex flex-col gap-[80px]">
+    <section className="w-full py-[80px] md:py-[160px] bg-[var(--bg-white)]">
+      <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-[40px] md:gap-[80px]">
         {/* 섹션 타이틀 */}
-        <div className="w-[464px]">
+        <div className="w-full md:w-[464px]">
           <motion.h2
-            className="text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-display)]"
+            className="text-[28px] md:text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-display)]"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true }}
@@ -161,7 +172,7 @@ export default function BusinessSection() {
         </div>
 
         {/* 카드 목록 */}
-        <div className="flex gap-6 items-center">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-stretch">
           {CARDS.map((card, i) => (
             <BusinessCard key={i} {...card} index={i} />
           ))}

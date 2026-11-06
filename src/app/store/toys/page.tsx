@@ -47,7 +47,7 @@ function ProductCard({ img, name, desc, price, onClick }: {
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
     >
-      <div className="relative w-full aspect-[377/278] rounded-[16px] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] rounded-[16px] overflow-hidden">
         <Image src={img} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" />
       </div>
       <div className="flex flex-col gap-4">
@@ -71,9 +71,10 @@ export default function StoreToys() {
       <GNB />
 
       {/* ── Hero Banner ───────────────────────────────────────────────────── */}
-      <section className="pt-[80px] px-[240px]">
+      <section className="pt-[80px] md:pt-[120px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6">
         <div
-          className="relative h-[524px] rounded-[24px] overflow-hidden flex items-center p-[80px]"
+          className="relative h-[524px] rounded-[24px] overflow-hidden flex items-end md:items-center p-[24px] md:p-[80px]"
         >
           <Image
             src="/assets/store-toys-hero.png"
@@ -88,18 +89,21 @@ export default function StoreToys() {
               문화사의 자체 개발 교구를 소개합니다
             </p>
             <p className="text-[18px] font-normal leading-[1.6] tracking-[-0.04em] text-[#F6F6F6]">
-              아이의 놀이와 함께하는 문화사의 제품을 만나보세요.
+              아이의 놀이와 함께하는<br className="md:hidden" /> 문화사의 제품을 만나보세요.
             </p>
           </div>
+        </div>
         </div>
       </section>
 
       {/* ── Product Grid ──────────────────────────────────────────────────── */}
-      <section className="px-[240px] py-[160px]">
-        <div className="grid grid-cols-4 gap-6">
-          {PRODUCTS.map((p) => (
-            <ProductCard key={p.name} {...p} onClick={() => setPopupOpen(true)} />
-          ))}
+      <section className="pt-[60px] pb-[120px] md:py-[120px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {PRODUCTS.map((p) => (
+              <ProductCard key={p.name} {...p} onClick={() => setPopupOpen(true)} />
+            ))}
+          </div>
         </div>
       </section>
 

@@ -1,123 +1,108 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useTransform } from "motion/react";
 import GNB from "@/components/GNB";
 import Footer from "@/components/Footer";
 
 const ease: [number, number, number, number] = [0.4, 0, 0.2, 1];
 
-// ─── Scroll-driven Hero ───────────────────────────────────────────────────────
+// ─── Scroll-driven Hero (mobile + desktop unified) ───────────────────────────
 
-function DesktopHero() {
+function Hero() {
   const [animDone, setAnimDone] = useState(false);
-  const progress = useMotionValue(0); // 0 → 1
+  const progress    = useMotionValue(0);
+  const isMobileRef = useRef(false);
 
-  const imageTop   = useTransform(progress, [0, 1],    ["365px", "0px"]);
-  const imageLeft  = useTransform(progress, [0, 1],    ["64px",  "0px"]);
-  const imageRight = useTransform(progress, [0, 1],    ["64px",  "0px"]);
-  const imageBR    = useTransform(progress, [0, 0.76], ["24px",  "0px"]);
-  const preTextOp  = useTransform(progress, [0, 0.56], [1, 0]);
-  const postTextOp = useTransform(progress, [0.5, 1],  [0, 1]);
+  // Functional transforms — read isMobileRef so responsive values update on resize
+  const imageTop   = useTransform(progress, (p) => `${(isMobileRef.current ? 300 : 365) * (1 - p)}px`);
+  const imageSide  = useTransform(progress, (p) => `${(isMobileRef.current ? 16  : 64)  * (1 - p)}px`);
+  const imageBR    = useTransform(progress, (p) => `${Math.max(0, 24 * (1 - Math.min(1, p / 0.76)))}px`);
+  const preTextOp  = useTransform(progress, (p) => Math.max(0, 1 - p / 0.56));
+  const postTextOp = useTransform(progress, (p) => Math.max(0, (p - 0.5) / 0.5));
 
   useEffect(() => {
-    const TOTAL = 500;
-    let acc = 0;
+    const WHEEL_TOTAL = 500;
+    const TOUCH_TOTAL = 400;
+    let p = 0;
     let locked = true;
     let cooldown = false;
+    let touchStartY = 0;
+
+    function checkMobile() { isMobileRef.current = window.innerWidth < 768; }
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
     function lock() {
       const sw = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.paddingRight = sw + "px";
       document.body.style.overflow = "hidden";
     }
-
     function unlock() {
       document.body.style.overflow = "";
       document.body.style.paddingRight = "";
     }
-
     lock();
 
     function onWheel(e: WheelEvent) {
       if (locked) {
         e.preventDefault();
-        acc = Math.max(0, Math.min(TOTAL, acc + e.deltaY));
-        progress.set(acc / TOTAL);
-        if (acc >= TOTAL) {
-          locked = false;
-          unlock();
-          setAnimDone(true);
-          cooldown = true;
-          setTimeout(() => { cooldown = false; }, 500);
+        p = Math.max(0, Math.min(1, p + e.deltaY / WHEEL_TOTAL));
+        progress.set(p);
+        if (p >= 1) {
+          locked = false; unlock(); setAnimDone(true);
+          cooldown = true; setTimeout(() => { cooldown = false; }, 500);
         }
       } else {
         if (cooldown) { e.preventDefault(); return; }
         if (window.scrollY <= 1 && e.deltaY < 0) {
           e.preventDefault();
-          locked = true;
-          lock();
-          setAnimDone(false);
-          acc = Math.max(0, Math.min(TOTAL, acc + e.deltaY));
-          progress.set(acc / TOTAL);
+          locked = true; lock(); setAnimDone(false);
+          p = Math.max(0, Math.min(1, p + e.deltaY / WHEEL_TOTAL));
+          progress.set(p);
         }
       }
     }
 
-    window.addEventListener("wheel", onWheel, { passive: false });
+    function onTouchStart(e: TouchEvent) {
+      touchStartY = e.touches[0].clientY;
+    }
+
+    function onTouchMove(e: TouchEvent) {
+      const delta = touchStartY - e.touches[0].clientY; // positive = swipe up
+      touchStartY = e.touches[0].clientY;
+
+      if (locked) {
+        e.preventDefault();
+        p = Math.max(0, Math.min(1, p + delta / TOUCH_TOTAL));
+        progress.set(p);
+        if (p >= 1) {
+          locked = false; unlock(); setAnimDone(true);
+          cooldown = true; setTimeout(() => { cooldown = false; }, 500);
+        }
+      } else {
+        if (cooldown) { e.preventDefault(); return; }
+        if (window.scrollY <= 1 && delta < -4) {
+          e.preventDefault();
+          locked = true; lock(); setAnimDone(false);
+          p = Math.max(0, Math.min(1, p + delta / TOUCH_TOTAL));
+          progress.set(p);
+        }
+      }
+    }
+
+    window.addEventListener("wheel",      onWheel,      { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true  });
+    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
     return () => {
-      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove",  onTouchMove);
+      window.removeEventListener("resize",     checkMobile);
       unlock();
     };
   }, [progress]);
-
-  const inner = (
-    <>
-      {/* Image: 아래에서 위로 올라오며 full-bleed */}
-      <motion.div
-        className="absolute overflow-hidden"
-        style={{ top: imageTop, left: imageLeft, right: imageRight, bottom: "0px", borderRadius: imageBR }}
-      >
-        <Image src="/assets/about-hero.png" alt="About 문화사" fill className="object-cover" priority />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, rgba(32,32,32,0.3) 0%, rgba(32,32,32,0.3) 100%), linear-gradient(90deg, rgba(255,242,204,0.4) 0%, rgba(255,242,204,0.4) 100%)",
-          }}
-        />
-      </motion.div>
-
-      {/* Pre-scroll: 흰 배경 위 검정 텍스트 */}
-      <motion.div
-        className="absolute top-[120px] left-0 right-0 flex flex-col items-center gap-4 pointer-events-none"
-        style={{ opacity: preTextOp }}
-      >
-        <h1 className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] text-center whitespace-nowrap">
-          About 문화사
-        </h1>
-        <div className="text-[24px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-display)] text-center max-w-[830px]">
-          <p>AI 기반 관찰과 교육 콘텐츠, 교사·부모 코칭을 연결하여</p>
-          <p>영유아 교육기관의 운영과 아이의 성장을 지원하는 교육 솔루션 기업</p>
-        </div>
-      </motion.div>
-
-      {/* Post-scroll: full-bleed 이미지 위 흰 텍스트 */}
-      <motion.div
-        className="absolute inset-0 flex flex-col items-center justify-center gap-4 pointer-events-none z-10"
-        style={{ opacity: postTextOp }}
-      >
-        <h1 className="text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] text-center whitespace-nowrap">
-          About 문화사
-        </h1>
-        <div className="text-[24px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-white)] text-center max-w-[830px]">
-          <p>AI 기반 관찰과 교육 콘텐츠, 교사·부모 코칭을 연결하여</p>
-          <p>영유아 교육기관의 운영과 아이의 성장을 지원하는 교육 솔루션 기업</p>
-        </div>
-      </motion.div>
-    </>
-  );
 
   return (
     <div className="relative" style={{ height: "100vh" }}>
@@ -125,39 +110,50 @@ function DesktopHero() {
         className="overflow-hidden bg-[var(--bg-white)]"
         style={animDone ? { position: "absolute", inset: 0 } : { position: "fixed", inset: 0, zIndex: 40 }}
       >
-        {inner}
+        {/* Image */}
+        <motion.div
+          className="absolute overflow-hidden"
+          style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
+        >
+          <Image src="/assets/about-hero.png" alt="About 문화사" fill className="object-cover" priority />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(90deg, rgba(32,32,32,0.3) 0%, rgba(32,32,32,0.3) 100%), linear-gradient(90deg, rgba(255,242,204,0.4) 0%, rgba(255,242,204,0.4) 100%)",
+            }}
+          />
+        </motion.div>
+
+        {/* Pre-scroll: 배경 위 검정 텍스트 */}
+        <motion.div
+          className="absolute top-[120px] left-0 right-0 flex flex-col items-center gap-4 pointer-events-none px-6"
+          style={{ opacity: preTextOp }}
+        >
+          <h1 className="text-[36px] md:text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)] text-center">
+            About 문화사
+          </h1>
+          <div className="text-[16px] md:text-[24px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-display)] text-center max-w-[830px]">
+            <p>AI 기반 관찰과 교육 콘텐츠, 교사·부모 코칭을 연결하여</p>
+            <p>영유아 교육기관의 운영과 아이의 성장을 지원하는 교육 솔루션 기업</p>
+          </div>
+        </motion.div>
+
+        {/* Post-scroll: full-bleed 이미지 위 흰 텍스트 */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center gap-4 pointer-events-none z-10 px-6"
+          style={{ opacity: postTextOp }}
+        >
+          <h1 className="text-[36px] md:text-[72px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] text-center">
+            About 문화사
+          </h1>
+          <div className="text-[16px] md:text-[24px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-white)] text-center max-w-[830px]">
+            <p>AI 기반 관찰과 교육 콘텐츠, 교사·부모 코칭을 연결하여</p>
+            <p>영유아 교육기관의 운영과 아이의 성장을 지원하는 교육 솔루션 기업</p>
+          </div>
+        </motion.div>
       </section>
     </div>
-  );
-}
-
-function MobileHero() {
-  return (
-    <section className="relative w-full h-[70vh] min-h-[480px] overflow-hidden">
-      <Image
-        src="/assets/about-hero.png"
-        alt="About 문화사"
-        fill
-        className="object-cover"
-        priority
-      />
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgba(32,32,32,0.3) 0%, rgba(32,32,32,0.3) 100%), linear-gradient(90deg, rgba(255,242,204,0.4) 0%, rgba(255,242,204,0.4) 100%)",
-        }}
-      />
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 pt-[72px]">
-        <h1 className="text-[40px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] text-center">
-          About 문화사
-        </h1>
-        <div className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-white)] text-center max-w-[400px]">
-          <p>AI 기반 관찰과 교육 콘텐츠, 교사·부모 코칭을 연결하여</p>
-          <p>영유아 교육기관의 운영과 아이의 성장을 지원하는 교육 솔루션 기업</p>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -176,16 +172,16 @@ function ValueItem({ num, title, body, imgSrc, delay = 0 }: ValueItemProps) {
     <div className="grid grid-cols-1 xl:grid-cols-[464px_1fr] gap-6 items-center w-full">
       {/* Text */}
       <motion.div
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-4 md:gap-6"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease, delay }}
       >
-        <p className="text-[32px] xl:text-[40px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)]">
+        <p className="text-[24px] md:text-[40px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)]">
           {title}
         </p>
-        <div className="text-[16px] xl:text-[18px] font-normal leading-[1.6] tracking-[-0.04em] text-[var(--txt-body)]">
+        <div className="text-[16px] md:text-[18px] font-normal leading-[1.6] tracking-[-0.04em] text-[var(--txt-body)]">
           {body.map((line, i) => (
             <p key={i}>{line}</p>
           ))}
@@ -275,7 +271,7 @@ function PhilosophySection() {
             OUR VALUE
           </motion.p>
           <motion.h2
-            className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)] text-center"
+            className="text-[28px] md:text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)] text-center"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true }}
@@ -373,7 +369,7 @@ const COLOR_SWATCHES: Omit<ColorSwatchProps, "index">[] = [
 
 function CISection() {
   return (
-    <section className="w-full bg-[var(--bg-gray)] py-[160px]">
+    <section className="w-full bg-[var(--bg-gray)] py-[120px]">
       <div className="max-w-[1440px] mx-auto w-full px-4 sm:px-8 xl:px-6 flex flex-col gap-[64px]">
         {/* Header */}
         <div className="flex flex-col gap-6">
@@ -387,7 +383,7 @@ function CISection() {
             CI
           </motion.p>
           <motion.h2
-            className="text-[40px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)]"
+            className="text-[28px] md:text-[40px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-display)]"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true }}
@@ -401,7 +397,7 @@ function CISection() {
         <div className="flex flex-col gap-[120px]">
           <div className="flex flex-col gap-12">
             <motion.h3
-              className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]"
+              className="text-[24px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -410,12 +406,11 @@ function CISection() {
               로고 시스템
             </motion.h3>
 
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-row gap-4 md:gap-6">
               {/* Primary Signature */}
               <div className="flex flex-col gap-4 flex-1">
                 <motion.div
-                  className="bg-[var(--bg-white)] rounded-2xl flex items-center justify-center"
-                  style={{ height: 398 }}
+                  className="bg-[var(--bg-white)] rounded-2xl flex items-center justify-center aspect-square md:aspect-auto md:h-[398px]"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -426,6 +421,7 @@ function CISection() {
                     alt="문화사 Primary Signature"
                     width={360}
                     height={162}
+                    className="w-[80px] sm:w-[240px] md:w-[360px] h-auto"
                   />
                 </motion.div>
                 <motion.p
@@ -442,8 +438,7 @@ function CISection() {
               {/* Secondary Signature */}
               <div className="flex flex-col gap-4 flex-1">
                 <motion.div
-                  className="bg-[var(--bg-white)] rounded-2xl flex items-center justify-center"
-                  style={{ height: 398 }}
+                  className="bg-[var(--bg-white)] rounded-2xl flex items-center justify-center aspect-square md:aspect-auto md:h-[398px]"
                   initial={{ opacity: 0, y: 32 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -454,6 +449,7 @@ function CISection() {
                     alt="문화사 Secondary Signature"
                     width={476}
                     height={60}
+                    className="w-[100px] sm:w-[320px] md:w-[476px] h-auto"
                   />
                 </motion.div>
                 <motion.p
@@ -472,7 +468,7 @@ function CISection() {
           {/* Color System */}
           <div className="flex flex-col gap-12">
             <motion.h3
-              className="text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]"
+              className="text-[24px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -501,16 +497,7 @@ export default function AboutPage() {
       <GNB />
 
       <main className="flex flex-col w-full">
-        {/* Mobile hero (< lg) */}
-        <div className="lg:hidden">
-          <MobileHero />
-        </div>
-
-        {/* Desktop scroll hero (≥ lg) */}
-        <div className="hidden lg:block">
-          <DesktopHero />
-        </div>
-
+        <Hero />
         <PhilosophySection />
         <CISection />
       </main>

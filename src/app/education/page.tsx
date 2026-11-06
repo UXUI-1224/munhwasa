@@ -152,7 +152,7 @@ function DesktopHero() {
           className="absolute inset-0 flex items-center pointer-events-none z-10"
           style={{ opacity: postTextOp }}
         >
-          <div className="w-full px-[240px] flex items-end justify-between">
+          <div className="max-w-[1440px] mx-auto w-full px-6 flex items-end justify-between">
             <div className="flex flex-col gap-6 w-[464px] shrink-0">
               <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--bg-primary)]">
                 Education
@@ -243,7 +243,8 @@ export default function EducationPage() {
       <DesktopHero />
 
       {/* ── Program Section ──────────────────────────────────────────────────── */}
-      <section className="px-[240px] py-[160px] flex flex-col gap-[80px] items-center">
+      <section className="py-[160px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-[80px] items-center">
 
         <div className="flex gap-10 items-start w-full">
           {/* Tabs */}
@@ -253,7 +254,7 @@ export default function EducationPage() {
               className={`flex items-center min-w-[220px] px-6 py-4 rounded-full text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors ${
                 activeTab === "open"
                   ? "bg-[var(--bg-primary)] text-[var(--txt-white)]"
-                  : "border border-[var(--border-neutral)] text-[var(--border-neutral)] bg-transparent"
+                  : "border border-[var(--border-neutral)] text-[var(--border-neutral)] bg-transparent hover:border-[var(--bg-primary)] hover:text-[var(--bg-primary)]"
               }`}
             >
               오픈 예정 교육/코칭
@@ -263,7 +264,7 @@ export default function EducationPage() {
               className={`flex items-center min-w-[220px] px-6 py-4 rounded-full text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors ${
                 activeTab === "ended"
                   ? "bg-[var(--bg-primary)] text-[var(--txt-white)]"
-                  : "border border-[var(--border-neutral)] text-[var(--border-neutral)] bg-transparent"
+                  : "border border-[var(--border-neutral)] text-[var(--border-neutral)] bg-transparent hover:border-[var(--bg-primary)] hover:text-[var(--bg-primary)]"
               }`}
             >
               종료된 교육/코칭
@@ -288,6 +289,7 @@ export default function EducationPage() {
               )}
             </motion.div>
           </div>
+        </div>
         </div>
 
       </section>

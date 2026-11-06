@@ -16,7 +16,7 @@ function NewsCard({ category, title, date, imgSrc, href }: NewsCardProps) {
   return (
     <Link
       href={href}
-      className="flex flex-col gap-6 w-[420px] shrink-0 group"
+      className="flex flex-col gap-6 w-[280px] md:w-[420px] shrink-0 group"
       draggable={false}
     >
       <div className="relative w-full rounded-2xl overflow-hidden" style={{ aspectRatio: "420/315" }}>
@@ -62,7 +62,7 @@ const NEWS_DATA: NewsCardProps[] = [
   }
 ];
 
-const CARD_STEP = 420 + 24;
+const CARD_GAP = 24;
 
 export default function NewsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,15 +73,17 @@ export default function NewsSection() {
   useEffect(() => {
     function update() {
       if (!containerRef.current || !trackRef.current) return;
-      const visibleW = containerRef.current.offsetWidth;
-      const totalW   = trackRef.current.scrollWidth;
-      const maxLeft  = Math.min(0, visibleW - totalW);
+      const firstCard = trackRef.current.children[0] as HTMLElement | null;
+      const cardStep  = firstCard ? firstCard.offsetWidth + CARD_GAP : 420 + CARD_GAP;
+      const visibleW  = containerRef.current.offsetWidth;
+      const totalW    = trackRef.current.scrollWidth;
+      const maxLeft   = Math.min(0, visibleW - totalW);
 
       const points: number[] = [];
       let p = 0;
       while (p > maxLeft) {
         points.push(p);
-        p -= CARD_STEP;
+        p -= cardStep;
       }
       points.push(maxLeft);
       setSnapPoints(points);
@@ -112,15 +114,14 @@ export default function NewsSection() {
 
     animate(x, target, { type: "spring", stiffness: 400, damping: 40 });
   }
-
+  
   return (
-    <section className="w-full bg-[var(--gray-050)] py-[120px]">
-      {/* container는 header 정렬 + drag 범위 측정용, overflow 없음 */}
+    <section className="w-full bg-[var(--gray-050)] py-[120px] overflow-hidden">
       <div ref={containerRef} className="max-w-[1440px] mx-auto w-full flex flex-col gap-[80px]">
         {/* Header */}
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-4 w-full px-6">
           <motion.h2
-            className="text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-display)] whitespace-nowrap"
+            className="text-[28px] lg:text-[44px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-display)] whitespace-nowrap"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
             whileInView={{ clipPath: "inset(0 0% 0 0)" }}
             viewport={{ once: true }}
@@ -140,11 +141,11 @@ export default function NewsSection() {
           </motion.a>
         </div>
 
-        {/* Cards — overflow 없음, 오른쪽으로 자연스럽게 흘러넘침 */}
+        {/* Cards — pl-6만, 오른쪽은 section overflow:hidden으로 자연스럽게 흘러넘침 */}
         <motion.div
           ref={trackRef}
           style={{ x }}
-          className="flex gap-6 items-start cursor-grab active:cursor-grabbing select-none"
+          className="flex gap-6 items-start cursor-grab active:cursor-grabbing select-none pl-6"
           drag="x"
           dragConstraints={{ left: snapPoints[snapPoints.length - 1] ?? 0, right: 0 }}
           dragElastic={0.05}
@@ -153,6 +154,8 @@ export default function NewsSection() {
           {NEWS_DATA.map((item, i) => (
             <NewsCard key={i} {...item} />
           ))}
+          {/* trailing spacer — 마지막 카드 오른쪽 여백 */}
+          <div className="shrink-0 w-4 h-1" aria-hidden />
         </motion.div>
       </div>
     </section>

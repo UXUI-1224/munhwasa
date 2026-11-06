@@ -65,7 +65,8 @@ export default function EducationProgramPage() {
       </section>
 
       {/* ── Article Content ──────────────────────────────────────────────────── */}
-      <section className="px-[240px] pt-10 pb-[160px] flex flex-col gap-9">
+      <section className="pt-10 pb-[160px]">
+        <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-9">
 
         {/* Meta */}
         <div className="flex gap-[10px] items-center text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--txt-black)]">
@@ -113,7 +114,7 @@ export default function EducationProgramPage() {
         <div className="flex items-start">
           <Link
             href="/education/teacher"
-            className="flex items-center justify-center px-4 py-3 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
+            className="flex items-center justify-center px-5 py-3 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] hover:opacity-90 transition-opacity"
           >
             목록
           </Link>
@@ -126,6 +127,7 @@ export default function EducationProgramPage() {
         >
           오픈 예정
         </button>
+        </div>
       </section>
 
       <Footer />

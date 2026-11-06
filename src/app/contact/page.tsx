@@ -26,7 +26,7 @@ function FormField({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-6 flex-1 min-w-0">
+    <div className="flex flex-col gap-6 flex-1 min-w-0 w-full">
       <div>
         <span className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-label)]">
           {label}
@@ -41,10 +41,10 @@ function FormField({
 }
 
 const inputClass =
-  "w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white";
+  "w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[14px] md:text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white";
 
 const selectClass =
-  "w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white appearance-none";
+  "w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[14px] md:text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white appearance-none";
 
 function ChevronDown() {
   return (
@@ -125,7 +125,7 @@ function PrivacySection({
         className="flex items-center gap-2 cursor-pointer"
       >
         <span
-          className={`flex items-center justify-center w-6 h-6 rounded border ${
+          className={`flex items-center justify-center w-5 h-5 md:w-6 md:h-6 rounded border ${
             agreed
               ? "bg-[var(--bg-primary)] border-[var(--bg-primary)]"
               : "bg-white border-[#D4D4D4]"
@@ -143,7 +143,7 @@ function PrivacySection({
             </svg>
           )}
         </span>
-        <span className="text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[var(--txt-label)]">
+        <span className="text-[14px] md:text-[16px] font-normal leading-[1.2] tracking-[-0.04em] text-[var(--txt-label)]">
           개인정보정책에 동의합니다.
         </span>
       </button>
@@ -176,7 +176,7 @@ function InstitutionForm() {
       </p>
 
       {/* Row 1 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="관심 솔루션" required>
           <div className="relative">
             <select
@@ -209,7 +209,7 @@ function InstitutionForm() {
       </div>
 
       {/* Row 2 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="기관명" required>
           <input
             className={inputClass}
@@ -229,7 +229,7 @@ function InstitutionForm() {
       </div>
 
       {/* Row 3 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="담당자" required>
           <input
             className={inputClass}
@@ -249,7 +249,7 @@ function InstitutionForm() {
       </div>
 
       {/* Row 4 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="이메일" required>
           <input
             className={inputClass}
@@ -279,7 +279,7 @@ function InstitutionForm() {
       <div className="flex justify-center">
         <button
           type="submit"
-          className="bg-[var(--bg-primary)] text-white text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] min-w-[200px] px-10 py-4 rounded-full hover:opacity-90 transition-opacity"
+          className="bg-[var(--bg-primary)] text-white text-[16px] md:text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] px-10 py-4 rounded-full hover:opacity-90 transition-opacity"
         >
           문의하기
         </button>
@@ -312,7 +312,7 @@ function GeneralForm() {
       </p>
 
       {/* Row 1 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="문의 유형" required>
           <div className="relative">
             <select
@@ -340,7 +340,7 @@ function GeneralForm() {
       </div>
 
       {/* Row 2 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="직급 및 담당">
           <input
             className={inputClass}
@@ -360,7 +360,7 @@ function GeneralForm() {
       </div>
 
       {/* Row 3 */}
-      <div className="flex gap-6 items-start w-full">
+      <div className="flex gap-6 items-start w-full md:flex-row flex-col">
         <FormField label="이메일" required>
           <input
             className={inputClass}
@@ -387,7 +387,7 @@ function GeneralForm() {
 
       <FormField label="문의 내용" required>
         <textarea
-          className="w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[16px] font-normal leading-[1.4] tracking-[-0.04em] text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white resize-none h-[120px]"
+          className="w-full border border-[#D4D4D4] rounded-2xl pl-8 pr-6 py-5 text-[14px] md:text-[16px] font-normal leading-[1.4] tracking-[-0.04em] text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none focus:border-[var(--bg-primary)] transition-colors bg-white resize-none h-[120px]"
           placeholder="문의 내용을 입력해 주세요."
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -431,7 +431,7 @@ function ContactContent() {
               <p className="text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-primary)]">
                 Customer Service
               </p>
-              <h1 className="text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
+              <h1 className="text-[28px] md:text-[48px] font-semibold leading-none tracking-[-0.06em] text-[var(--txt-display)]">
                 상담문의
               </h1>
             </div>
@@ -451,10 +451,10 @@ function ContactContent() {
               <button
                 type="button"
                 onClick={() => setActiveTab("institution")}
-                className={`flex items-center px-6 py-4 rounded-full text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] transition-colors ${
+                className={`flex items-center px-5 py-3 md:px-6 md:py-4 rounded-full text-[16px] md:text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors bg-[var(--bg-primary)] text-white ${
                   activeTab === "institution"
                     ? "bg-[var(--bg-primary)] text-white"
-                    : "border border-[#D4D4D4] text-[#D4D4D4]"
+                    : "border border-[#D4D4D4] text-[#D4D4D4] hover:border-[var(--bg-primary)] hover:text-[var(--bg-primary)]"
                 }`}
               >
                 기관 도입 상담
@@ -462,10 +462,10 @@ function ContactContent() {
               <button
                 type="button"
                 onClick={() => setActiveTab("general")}
-                className={`flex items-center px-6 py-4 rounded-full text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] transition-colors ${
+                className={`flex items-center px-5 py-3 md:px-6 md:py-4 rounded-full text-[16px] md:text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors ${
                   activeTab === "general"
                     ? "bg-[var(--bg-primary)] text-white"
-                    : "border border-[#D4D4D4] text-[#D4D4D4]"
+                    : "border border-[#D4D4D4] text-[#D4D4D4] hover:border-[var(--bg-primary)] hover:text-[var(--bg-primary)]"
                 }`}
               >
                 일반 문의
