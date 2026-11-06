@@ -116,7 +116,7 @@ export default function NewsSection() {
   }
   
   return (
-    <section className="w-full bg-[var(--gray-050)] py-[120px] overflow-hidden">
+    <section className="w-full bg-[var(--bg-gray)] py-[120px] overflow-hidden">
       <div ref={containerRef} className="max-w-[1440px] mx-auto w-full flex flex-col gap-[80px]">
         {/* Header */}
         <div className="flex flex-col gap-4 w-full px-6">
@@ -129,16 +129,6 @@ export default function NewsSection() {
           >
             문화사가 만드는 교육 현장 소식
           </motion.h2>
-          <motion.a
-            href="/activity"
-            className="flex items-center gap-2 px-4 py-3 rounded-full bg-[var(--bg-primary)] text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-white)] self-start hover:opacity-90 transition-opacity"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1], delay: 0.95 }}
-          >
-            소식 보기
-          </motion.a>
         </div>
 
         {/* Cards — pl-6만, 오른쪽은 section overflow:hidden으로 자연스럽게 흘러넘침 */}
