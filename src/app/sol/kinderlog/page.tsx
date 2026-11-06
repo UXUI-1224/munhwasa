@@ -200,16 +200,22 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
             <div className="flex md:hidden gap-4">
               <div className="relative w-6 shrink-0">
                 <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-[#E8E8E8] rounded-full" />
-                <div
+                <motion.div
                   className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-[var(--bg-primary)] rounded-full"
-                  style={{ height: `100%` }}
+                  initial={{ height: "0%" }}
+                  whileInView={{ height: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
                 />
-                <div
+                <motion.div
                   className="absolute left-1/2 -translate-x-1/2 w-6 h-6"
-                  style={{ top: `clamp(0px, calc(100% - 12px), calc(100% - 24px))` }}
+                  initial={{ top: "0%" }}
+                  whileInView={{ top: "calc(100% - 24px)" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <Image src="/assets/sol-step-bullet.svg" alt="" fill />
-                </div>
+                </motion.div>
               </div>
               <div className="flex-1 flex flex-col gap-6">
                 {steps.map((step, i) => (
@@ -236,16 +242,22 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
             {/* Desktop: horizontal track */}
             <div className="hidden md:block relative h-6 w-full">
               <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-[#E8E8E8] rounded-full" />
-              <div
+              <motion.div
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--bg-primary)] rounded-full"
-                style={{ width: `100%` }}
+                initial={{ width: "0%" }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
               />
-              <div
+              <motion.div
                 className="absolute top-1/2 -translate-y-1/2 w-6 h-6"
-                style={{ left: `calc(100% - 12px)` }}
+                initial={{ left: "-12px" }}
+                whileInView={{ left: "calc(100% - 12px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 <Image src="/assets/sol-step-bullet.svg" alt="" fill />
-              </div>
+              </motion.div>
             </div>
 
             {/* Desktop: 4-col labels */}
