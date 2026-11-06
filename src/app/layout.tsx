@@ -5,6 +5,19 @@ export const metadata: Metadata = {
   title: "문화사",
   description:
     "AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로 영유아 교육기관의 운영과 아이의 성장을 지원합니다.",
+  openGraph: {
+    title: "문화사",
+    description:
+      "AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로 영유아 교육기관의 운영과 아이의 성장을 지원합니다.",
+    images: [{ url: "/MetaImage.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "문화사",
+    description:
+      "AI 관찰과 교육 콘텐츠, 교사와 부모 코칭으로 영유아 교육기관의 운영과 아이의 성장을 지원합니다.",
+    images: ["/MetaImage.png"],
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
