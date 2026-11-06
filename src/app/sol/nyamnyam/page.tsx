@@ -184,69 +184,11 @@ function Hero() {
 type Step = { title: string; desc: string | string[] };
 
 function StepSection({ title, steps }: { title: string; steps: Step[] }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [fixed, setFixed] = useState(false);
-  const [animDone, setAnimDone] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el || animDone) return;
-
-    let triggered = false;
-
-    function runAnimation() {
-      const absTop = el!.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: absTop });
-
-      const sw = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.paddingRight = sw + "px";
-      document.body.style.overflow = "hidden";
-
-      setFixed(true);
-
-      let start: number | null = null;
-      const DURATION = 2200;
-
-      function frame(ts: number) {
-        if (start === null) start = ts;
-        const p = Math.min(1, (ts - start) / DURATION);
-        setProgress(p);
-        if (p < 1) {
-          requestAnimationFrame(frame);
-        } else {
-          document.body.style.overflow = "";
-          document.body.style.paddingRight = "";
-          setFixed(false);
-          setAnimDone(true);
-          const bottom = absTop + window.innerHeight;
-          setTimeout(() => {
-            window.scrollTo({ top: bottom, behavior: "smooth" });
-          }, 300);
-        }
-      }
-
-      requestAnimationFrame(frame);
-    }
-
-    function onScroll() {
-      if (triggered) return;
-      const rect = el!.getBoundingClientRect();
-      if (rect.top <= 1) {
-        triggered = true;
-        runAnimation();
-      }
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [animDone]);
-
   return (
-    <div ref={wrapperRef} className="relative" style={{ height: "100vh" }}>
+    <div className="relative" style={{ height: "240px" }}>
       <section
         className="bg-[var(--bg-gray)] w-full flex flex-col justify-center"
-        style={fixed ? { position: "fixed", inset: 0, zIndex: 40 } : { position: "absolute", inset: 0 }}
+        style={{ position: "absolute", inset: 0 }}
       >
         <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-10">
           <h2 className="text-[22px] md:text-[28px] font-semibold leading-[1.3] tracking-[-0.06em] text-[var(--txt-heading)]">
@@ -260,11 +202,11 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
                 <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-[#E8E8E8] rounded-full" />
                 <div
                   className="absolute left-1/2 -translate-x-1/2 top-0 w-1 bg-[var(--bg-primary)] rounded-full"
-                  style={{ height: `${progress * 100}%` }}
+                  style={{ height: `100%` }}
                 />
                 <div
                   className="absolute left-1/2 -translate-x-1/2 w-6 h-6"
-                  style={{ top: `clamp(0px, calc(${progress * 100}% - 12px), calc(100% - 24px))` }}
+                  style={{ top: `clamp(0px, calc(100% - 12px), calc(100% - 24px))` }}
                 >
                   <Image src="/assets/sol-step-bullet.svg" alt="" fill />
                 </div>
@@ -296,11 +238,11 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
               <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-[#E8E8E8] rounded-full" />
               <div
                 className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-[var(--bg-primary)] rounded-full"
-                style={{ width: `${progress * 100}%` }}
+                style={{ width: `100%` }}
               />
               <div
                 className="absolute top-1/2 -translate-y-1/2 w-6 h-6"
-                style={{ left: `calc(${progress * 100}% - 12px)` }}
+                style={{ left: `calc(100% - 12px)` }}
               >
                 <Image src="/assets/sol-step-bullet.svg" alt="" fill />
               </div>
