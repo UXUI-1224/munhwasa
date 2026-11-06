@@ -11,7 +11,6 @@ import Footer from "@/components/Footer";
 const PROGRAM = {
   category: "교육/코칭",
   title: "2027년 유아 교육 코칭",
-  date: "2026-10-27",
   views: 312,
   img: "/assets/education-program-1.png",
   details: [
@@ -67,11 +66,6 @@ export default function EducationProgramPage() {
       {/* ── Article Content ──────────────────────────────────────────────────── */}
       <section className="pt-10 pb-[160px]">
         <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-9">
-
-        {/* Meta */}
-        <div className="flex gap-[10px] items-center text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--txt-black)]">
-          <span>{PROGRAM.date}</span>
-        </div>
 
         {/* Main image */}
         <motion.div
