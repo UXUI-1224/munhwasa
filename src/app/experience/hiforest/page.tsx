@@ -28,43 +28,43 @@ const CURRICULUM_COLS = [
 
 const PLAY_ZONES = [
   {
-    img: "/assets/hiporest-zone-1.png",
+    img: "/assets/hiporest/hiporest-zone-1.png",
     tags: ["편백존", "최대 15~20명"],
     name: "감각놀이존",
     desc: "친환경 편백 공간에서 담고, 만지고, 옮기는 촉감 놀이로 오감을 깨웁니다.",
   },
   {
-    img: "/assets/hiporest-zone-2.png",
+    img: "/assets/hiporest/hiporest-zone-2.png",
     tags: ["드로잉아트", "최대 15명"],
     name: "예술놀이존",
     desc: "색을 자유롭게 표현하며 창의력을 키우는 확장형 미술 체험 공간입니다.",
   },
   {
-    img: "/assets/hiporest-zone-3.png",
+    img: "/assets/hiporest/hiporest-zone-3.png",
     tags: ["미니 마을", "최대 20명"],
     name: "역할놀이존",
     desc: "주방, 마켓, 아이스크림 가게, 인형의 집에서 역할을 맡아 노는 작은 마을입니다.",
   },
   {
-    img: "/assets/hiporest-zone-4.png",
+    img: "/assets/hiporest/hiporest-zone-4.png",
     tags: ["XR액션큐"],
     name: "신체활동놀이존",
     desc: "바닥 화면 위를 뛰어다니며 즐기는 몰입형 신체 활동 공간입니다.",
   },
   {
-    img: "/assets/hiporest-zone-5.png",
+    img: "/assets/hiporest/hiporest-zone-5.png",
     tags: ["야외 잔디 운동장"],
     name: "자연놀이존",
     desc: "잔디 위를 뛰놀며 북 놀이, 미끄럼틀, 밧줄 균형 놀이로 계절을 느끼는 야외 공간입니다.",
   },
   {
-    img: "/assets/hiporest-zone-6.png",
+    img: "/assets/hiporest/hiporest-zone-6.png",
     tags: ["파티룸"],
     name: "감성놀이존",
     desc: "티파티와 단체 사진을 남기는 파티 분위기의 실내 포토존입니다.",
   },
   {
-    img: "/assets/hiporest-zone-7.png",
+    img: "/assets/hiporest/hiporest-zone-7.png",
     tags: ["대강당"],
     name: "자유놀이존",
     desc: "전동차와 교통 표지판이 있는 넓은 홀에서 자유롭게 뛰노는 공간입니다.",
@@ -289,7 +289,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/hiporest-hero.png" alt="하이포레스트" fill className="object-cover" priority />
+          <Image src="/assets/hiporest/hiporest-hero.png" alt="하이포레스트" fill className="object-cover" priority />
           <div className="absolute inset-0" style={{ background: "rgba(32,32,32,0.16)" }} />
         </motion.div>
 
@@ -421,10 +421,10 @@ export default function HiforestPage() {
           </div>
           <div className="grid grid-cols-2 md:flex md:gap-6 gap-4 w-full">
             {[
-              { img: "/assets/hiporest-feature-1.png", title: "대규모 단독 건물", desc: "원 전용 예약으로 다른 기관과 섞이지 않고 단독으로 이용합니다." },
-              { img: "/assets/hiporest-feature-2.png", title: "넓은 전용 주차장", desc: "단체 차량 하차부터 입장까지 안전한 동선을 갖췄습니다." },
-              { img: "/assets/hiporest-feature-3.png", title: "탁 트인 전망", desc: "높은 지대에서 내려다보는 송도 전망과 숲세권 자연환경." },
-              { img: "/assets/hiporest-feature-3.png", title: "실내 · 야외 놀이환경", desc: "날씨와 계절에 맞춰 실내와 야외를 함께 이용합니다." },
+              { img: "/assets/hiporest/hiporest-feature-1.png", title: "대규모 단독 건물", desc: "원 전용 예약으로 다른 기관과 섞이지 않고 단독으로 이용합니다." },
+              { img: "/assets/hiporest/hiporest-feature-2.png", title: "넓은 전용 주차장", desc: "단체 차량 하차부터 입장까지 안전한 동선을 갖췄습니다." },
+              { img: "/assets/hiporest/hiporest-feature-3.png", title: "탁 트인 전망", desc: "높은 지대에서 내려다보는 송도 전망과 숲세권 자연환경." },
+              { img: "/assets/hiporest/hiporest-feature-3.png", title: "실내 · 야외 놀이환경", desc: "날씨와 계절에 맞춰 실내와 야외를 함께 이용합니다." },
             ].map((card, i) => (
               <motion.div
                 key={i}
@@ -547,7 +547,7 @@ export default function HiforestPage() {
                         className={`flex-1 h-[82px] bg-white flex items-center justify-center ${ci < CURRICULUM_COLS.length - 1 ? "border-r border-[var(--border-neutral)]" : ""}`}
                       >
                         {col.bullets[zi] && (
-                          <Image src="/assets/hiporest-bullet.svg" alt="" width={16} height={16} />
+                          <Image src="/assets/hiporest/hiporest-bullet.svg" alt="" width={16} height={16} />
                         )}
                       </div>
                     ))}
@@ -567,7 +567,7 @@ export default function HiforestPage() {
           >
             <div className="flex items-center justify-center w-full h-full [transform:scaleX(-1)] md:[transform:none]">
               <Image
-                src="/assets/hiporest-deco.svg"
+                src="/assets/hiporest/hiporest-deco.svg"
                 alt=""
                 width={451}
                 height={451}
@@ -792,7 +792,7 @@ export default function HiforestPage() {
                 하이포레스트를 거친 아이들은
               </p>
               <div className="relative aspect-[16/9] md:h-[280px] md:aspect-auto rounded-[16px] overflow-hidden">
-                <Image src="/assets/hiporest-kids.png" alt="놀이하는 아이들" fill className="object-cover" />
+                <Image src="/assets/hiporest/hiporest-kids.png" alt="놀이하는 아이들" fill className="object-cover" />
               </div>
               <div className="flex flex-col text-[16px]">
                 {Array.from({ length: 4 }, (_, row) => (
@@ -820,7 +820,7 @@ export default function HiforestPage() {
                 하이포레스트만의 장점
               </p>
               <div className="relative aspect-[16/9] md:h-[280px] md:aspect-auto rounded-[16px] overflow-hidden">
-                <Image src="/assets/hiporest-teachers.png" alt="인솔 교사와 아이들" fill className="object-cover" />
+                <Image src="/assets/hiporest/hiporest-teachers.png" alt="인솔 교사와 아이들" fill className="object-cover" />
               </div>
               <div className="flex flex-col text-[16px]">
                 {Array.from({ length: 4 }, (_, row) => (
@@ -852,7 +852,7 @@ export default function HiforestPage() {
                   이런 기관에 추천해요!
                 </p>
                 <div className="absolute bottom-[-13.5px] left-9">
-                  <Image src="/assets/hiporest-vector.svg" alt="" width={21} height={14} />
+                  <Image src="/assets/hiporest/hiporest-vector.svg" alt="" width={21} height={14} />
                 </div>
               </motion.div>
               <div className="flex items-center justify-center">
@@ -863,7 +863,7 @@ export default function HiforestPage() {
                   transition={{ type: "spring", stiffness: 240, damping: 12, delay: 0.1 }}
                 >
                   <Image
-                    src="/assets/hiporest-02.svg"
+                    src="/assets/hiporest/hiporest-02.svg"
                     alt=""
                     width={118}
                     height={120}

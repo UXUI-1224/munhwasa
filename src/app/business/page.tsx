@@ -110,7 +110,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/business-hero.jpg" alt="사업 영역" fill className="object-cover object-bottom" priority />
+          <Image src="/assets/business/business-hero.jpg" alt="사업 영역" fill className="object-cover object-bottom" priority />
           <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(90deg, rgba(32,32,32,0.4) 0%, rgba(32,32,32,0.4) 100%), linear-gradient(90deg, rgba(255,242,204,0.2) 0%, rgba(255,242,204,0.2) 100%)" }} />
         </motion.div>
 
@@ -160,7 +160,7 @@ const bounce: [number, number, number, number] = [0.34, 1.56, 0.64, 1];
 const BIZ_CARDS: (BizCardProps & { key: string })[] = [
   {
     key: "ai",
-    icon: "/assets/biz-ai-icon.svg",
+    icon: "/assets/business/biz-ai-icon.svg",
     iconAlt: "AI 솔루션",
     title: "AI·데이터 솔루션",
     desc: ["AI가 아이의 하루를 관찰하고 데이터로 기록해", "효율적인 교육 운영과 가정 교육을 돕습니다."],
@@ -168,7 +168,7 @@ const BIZ_CARDS: (BizCardProps & { key: string })[] = [
   },
   {
     key: "edu",
-    icon: "/assets/biz-edu-icon.svg",
+    icon: "/assets/business/biz-edu-icon.svg",
     iconAlt: "교육 및 코칭",
     title: "교육 및 코칭",
     desc: ["교사와 부모, 원장이 아이를 더 깊이 이해하도록", "현장에 맞는 코칭과 세미나로 함께합니다."],
@@ -176,7 +176,7 @@ const BIZ_CARDS: (BizCardProps & { key: string })[] = [
   },
   {
     key: "program",
-    icon: "/assets/biz-program-icon.svg",
+    icon: "/assets/business/biz-program-icon.svg",
     iconAlt: "체험/프로그램",
     title: "체험/프로그램",
     desc: ["온 가족이 함께하는 현장에서", "아이에게 특별한 경험을 선사합니다."],
@@ -184,7 +184,7 @@ const BIZ_CARDS: (BizCardProps & { key: string })[] = [
   },
   {
     key: "contents",
-    icon: "/assets/biz-contents-icon.svg",
+    icon: "/assets/business/biz-contents-icon.svg",
     iconAlt: "교구 및 콘텐츠",
     title: "교구 및 콘텐츠",
     desc: ["손에 닿는 교구와 이야기로", "아이의 놀이가 자연스럽게 배움이 됩니다."],
@@ -298,7 +298,7 @@ function BusinessSection({ isDesktop }: { isDesktop: boolean }) {
             transition={{ duration: 0.5, ease: bounce, delay: 0 }}
           >
             <div className="relative w-[160px] h-[72px]">
-              <Image src="/assets/logo-white.svg" alt="문화사" fill className="object-contain" />
+              <Image src="/assets/logos/logo-white.svg" alt="문화사" fill className="object-contain" />
             </div>
           </motion.div>
 
@@ -308,7 +308,7 @@ function BusinessSection({ isDesktop }: { isDesktop: boolean }) {
             animate={{ rotate: 360 }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
-            <Image src="/assets/biz-back-track.svg" alt="" fill className="object-contain" />
+            <Image src="/assets/business/biz-back-track.svg" alt="" fill className="object-contain" />
           </motion.div>
 
           {/* AI card — top left */}

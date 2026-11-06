@@ -18,7 +18,7 @@ type Program = {
 
 const OPEN_PROGRAMS: Program[] = [
   {
-    img: "/assets/parent-program-1.png",
+    img: "/assets/education/parent-program-1.png",
     title: "우리 아이를 위한 고운말 코칭",
     details: [
       { label: "대상", value: "만7세 이하 유아 보호자" },
@@ -144,7 +144,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/parent-hero.png" alt="부모 코칭" fill className="object-cover" priority />
+          <Image src="/assets/education/parent-hero.png" alt="부모 코칭" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
         </motion.div>
 

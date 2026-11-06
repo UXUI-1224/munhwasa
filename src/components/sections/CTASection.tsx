@@ -29,7 +29,7 @@ export default function CTASection() {
     <section className="relative w-full bg-[var(--bg-secondary)] pt-[80px] pb-[240px] md:py-[80px] overflow-hidden">
       {/* Watermark logo */}
       <Image
-        src="/assets/logo-watermark.svg"
+        src="/assets/logos/logo-watermark.svg"
         alt=""
         width={1200}
         height={121}
@@ -167,7 +167,7 @@ export default function CTASection() {
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
             transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1], delay: T.balloon }}
           >
-            <Image src="/assets/banner-1.svg" alt="" width={80} height={68} />
+            <Image src="/assets/home/banner-1.svg" alt="" width={80} height={68} />
           </motion.div>
         </div>
       </div>

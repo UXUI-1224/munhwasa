@@ -12,7 +12,7 @@ const PROGRAM = {
   category: "원장 세미나",
   title: "연말 원아 맞춤 교육 세미나",
   views: 148,
-  img: "/assets/seminar-program-1.png",
+  img: "/assets/education/seminar-program-1.png",
   details: [
     { label: "대상", value: "원장" },
     { label: "목적", value: "원아 맞춤 교육 세미나" },
@@ -40,7 +40,7 @@ export default function SeminarProgramPage() {
         <div className="absolute inset-0 bg-[#2a1e18]" />
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/assets/seminar-program-1.png"
+            src="/assets/education/seminar-program-1.png"
             alt=""
             fill
             className="object-cover object-center opacity-20"

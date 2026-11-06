@@ -12,7 +12,7 @@ const PROGRAM = {
   category: "부모 코칭",
   title: "우리 아이를 위한 고운말 코칭",
   views: 204,
-  img: "/assets/parent-program-1.png",
+  img: "/assets/education/parent-program-1.png",
   details: [
     { label: "대상", value: "만7세 이하 유아 보호자" },
     { label: "목적", value: "우리 아이를 위한 고운말 코칭" },
@@ -40,7 +40,7 @@ export default function ParentProgramPage() {
         <div className="absolute inset-0 bg-[#2a1e18]" />
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/assets/parent-program-1.png"
+            src="/assets/education/parent-program-1.png"
             alt=""
             fill
             className="object-cover object-center opacity-20"

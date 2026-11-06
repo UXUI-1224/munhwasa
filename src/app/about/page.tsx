@@ -115,7 +115,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/about-hero.png" alt="About 문화사" fill className="object-cover" priority />
+          <Image src="/assets/about/about-hero.png" alt="About 문화사" fill className="object-cover" priority />
           <div
             className="absolute inset-0"
             style={{
@@ -217,7 +217,7 @@ const VALUES: ValueItemProps[] = [
       "교사가 미처 담아내기 어려운 일상의 순간까지,",
       "아이의 하루를 놓치지 않고 바라봅니다.",
     ],
-    imgSrc: "/assets/about-value-1.png",
+    imgSrc: "/assets/about/about-value-1.png",
     delay: 0,
   },
   {
@@ -228,7 +228,7 @@ const VALUES: ValueItemProps[] = [
       "아이만의 성장 패턴과 변화의 신호를 데이터로 읽어내어,",
       "감이 아닌 근거로 아이를 이해합니다.",
     ],
-    imgSrc: "/assets/about-value-2.png",
+    imgSrc: "/assets/about/about-value-2.png",
     delay: 0,
   },
   {
@@ -239,7 +239,7 @@ const VALUES: ValueItemProps[] = [
       "아이는 놀이 속에서 자연스럽게 배우고",
       "교사와 가정은 아이의 성장을 함께 확인합니다.",
     ],
-    imgSrc: "/assets/about-value-3.png",
+    imgSrc: "/assets/about/about-value-3.png",
     delay: 0,
   },
   {
@@ -250,7 +250,7 @@ const VALUES: ValueItemProps[] = [
       "문화사는 교사의 곁에서 운영을 돕고",
       "가정과 함께 아이의 다음 걸음을 설계합니다.",
     ],
-    imgSrc: "/assets/about-value-4.png",
+    imgSrc: "/assets/about/about-value-4.png",
     delay: 0,
   },
 ];
@@ -417,7 +417,7 @@ function CISection() {
                   transition={{ duration: 0.5, ease, delay: 0 }}
                 >
                   <Image
-                    src="/assets/logo-vertical.svg"
+                    src="/assets/logos/logo-vertical.svg"
                     alt="문화사 Primary Signature"
                     width={360}
                     height={162}
@@ -445,7 +445,7 @@ function CISection() {
                   transition={{ duration: 0.5, ease, delay: 0.1 }}
                 >
                   <Image
-                    src="/assets/logo-horizontal.svg"
+                    src="/assets/logos/logo-horizontal.svg"
                     alt="문화사 Secondary Signature"
                     width={476}
                     height={60}

@@ -109,7 +109,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/nyamnyam-hero.png" alt="냠냠키즈" fill className="object-cover" priority />
+          <Image src="/assets/nyamnyam/nyamnyam-hero.png" alt="냠냠키즈" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
         </motion.div>
 
@@ -214,7 +214,7 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  <Image src="/assets/sol-step-bullet.svg" alt="" fill />
+                  <Image src="/assets/sol/sol-step-bullet.svg" alt="" fill />
                 </motion.div>
               </div>
               <div className="flex-1 flex flex-col gap-6">
@@ -256,7 +256,7 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
               >
-                <Image src="/assets/sol-step-bullet.svg" alt="" fill />
+                <Image src="/assets/sol/sol-step-bullet.svg" alt="" fill />
               </motion.div>
             </div>
 
@@ -292,22 +292,22 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
 
 const NYAMNYAM_FEATURES = [
   {
-    img: "/assets/nyamnyam-feature-1.png",
+    img: "/assets/nyamnyam/nyamnyam-feature-1.png",
     title: "식사 전후 식판 분석",
     desc: "아이가 식판을 스캔하면 즐거운 식사 시간이 시작됩니다.\n음식을 골고루 먹으면 과일이 열리는 성장나무 '냠냠트리'로 아이가 스스로 올바른 식습관의 동기를 얻습니다.",
   },
   {
-    img: "/assets/nyamnyam-feature-2.png",
+    img: "/assets/nyamnyam/nyamnyam-feature-2.png",
     title: "식습관과 섭취량 관리",
     desc: "AI 푸드스캐너의 데이터로 원아의 식습관과 성장 현황을 관리합니다.\n원아 등록부터 식습관 리포트, 냠냠트리까지 한눈에 관리할 수 있습니다.",
   },
   {
-    img: "/assets/nyamnyam-feature-3.png",
+    img: "/assets/nyamnyam/nyamnyam-feature-3.png",
     title: "식습관 교육 콘텐츠",
     desc: "식사 전에는 식습관 예절과 안전 교육 등 콘텐츠를, 식사 후에는 남긴 양에 따라 칭찬과 격려의 메시지를 전합니다.\n우리 원의 메뉴로 AI가 매일 영상을 자동으로 생성하는 'AI 작은 선생님'이, 오늘의 메뉴 소개와 편식 개선 미션으로 아이들의 즐거운 점심시간을 돕습니다.",
   },
   {
-    img: "/assets/nyamnyam-feature-4.png",
+    img: "/assets/nyamnyam/nyamnyam-feature-4.png",
     title: "기관과 가정의 식습관 연계",
     desc: "원아별 식습관 리포트를 가정에 제공하여 매일 우리 아이의 식사를 보호자가 점검할 수 있습니다.\n식습관 개선 놀이 활동 '냠냠마을'의 식습관 변화에 따른 동물/작물 키우기 콘텐츠를 통해 아이가 식습관을 익히고 개선할 수 있도록 돕습니다.",
   },
@@ -412,7 +412,7 @@ export default function NyamnyamPage() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 280, damping: 14, delay: 0.15 }}
                 >
-                  <Image src="/assets/nyamnyam-benefit-teacher.png" alt="" fill className="object-contain p-2" />
+                  <Image src="/assets/nyamnyam/nyamnyam-benefit-teacher.png" alt="" fill className="object-contain p-2" />
                 </motion.div>
                 <div className="flex flex-col gap-1">
                   <p className="text-[18px] md:text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-black">교사</p>
@@ -437,7 +437,7 @@ export default function NyamnyamPage() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 280, damping: 14, delay: 0.28 }}
                 >
-                  <Image src="/assets/nyamnyam-benefit-principal.png" alt="" fill className="object-contain p-2" />
+                  <Image src="/assets/nyamnyam/nyamnyam-benefit-principal.png" alt="" fill className="object-contain p-2" />
                 </motion.div>
                 <div className="flex flex-col gap-1">
                   <p className="text-[18px] md:text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-black">원장</p>
@@ -462,7 +462,7 @@ export default function NyamnyamPage() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 280, damping: 14, delay: 0.41 }}
                 >
-                  <Image src="/assets/nyamnyam-benefit-parent.png" alt="" fill className="object-cover" />
+                  <Image src="/assets/nyamnyam/nyamnyam-benefit-parent.png" alt="" fill className="object-cover" />
                 </motion.div>
                 <div className="flex flex-col gap-1">
                   <p className="text-[18px] md:text-[20px] font-semibold leading-[1.6] tracking-[-0.04em] text-black">학부모</p>
@@ -480,7 +480,7 @@ export default function NyamnyamPage() {
           className="relative w-full px-[40px] py-16 md:py-[120px] flex flex-col items-center justify-center gap-6 text-center overflow-hidden"
           style={{ background: "linear-gradient(90deg, #3D1B08 0%, #0957C8 100%)" }}
         >
-          <Image src="/assets/sol-banner-bg.svg" alt="" fill className="object-cover pointer-events-none" />
+          <Image src="/assets/sol/sol-banner-bg.svg" alt="" fill className="object-cover pointer-events-none" />
           <h2 className="text-[24px] md:text-[48px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] px-6">
             냠냠키즈를 통해<br />스마트하게 운영하세요
           </h2>

@@ -6,14 +6,14 @@ import Link from "next/link";
 const NEWS_CARDS = [
   {
     id: 1,
-    image: "/assets/activity-news-1.png",
+    image: "/assets/activity/activity-news-1.png",
     category: "현장소식",
     title: "영유아 교육 현장",
     date: "2026.10.21",
   },
   {
     id: 2,
-    image: "/assets/activity-news-2.png",
+    image: "/assets/activity/activity-news-2.png",
     category: "보도자료",
     title: "2026년 하반기 원장 초청 설명회",
     date: "2026.10.21",

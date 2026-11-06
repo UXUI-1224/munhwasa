@@ -52,7 +52,7 @@ function YellowPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-graphic-1-3.svg" alt="" className="w-full h-full rotate-[6.72deg] origin-center" />
+        <img src="/assets/home/hero-graphic-1-3.svg" alt="" className="w-full h-full rotate-[6.72deg] origin-center" />
       </motion.div>
 
       {/* Vector7 sparkle (last block) */}
@@ -70,7 +70,7 @@ function YellowPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-graphic-1-4.svg" alt="" className="absolute inset-0 w-full h-full" />
+        <img src="/assets/home/hero-graphic-1-4.svg" alt="" className="absolute inset-0 w-full h-full" />
       </motion.div>
 
       {/* Background rect */}
@@ -107,7 +107,7 @@ function YellowPill({ animDelay = 0 }: { animDelay?: number }) {
         <div className="-scale-y-100 flex-none">
           <div className="relative overflow-hidden" style={{ width: 128.33, height: 128.3 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-chara-1.svg" alt="" className="absolute inset-0 w-full h-full" />
+            <img src="/assets/home/hero-chara-1.svg" alt="" className="absolute inset-0 w-full h-full" />
           </div>
         </div>
       </motion.div>
@@ -126,7 +126,7 @@ function YellowPill({ animDelay = 0 }: { animDelay?: number }) {
         <div className="flex-none rotate-[10.13deg]">
           <div className="relative overflow-hidden" style={{ width: 107.24, height: 74.36 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-graphic-1-1.svg" alt="" className="absolute inset-0 w-full h-full" />
+            <img src="/assets/home/hero-graphic-1-1.svg" alt="" className="absolute inset-0 w-full h-full" />
           </div>
         </div>
       </motion.div>
@@ -143,7 +143,7 @@ function YellowPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-graphic-1-2.svg" alt="" className="absolute inset-0 w-full h-full" />
+        <img src="/assets/home/hero-graphic-1-2.svg" alt="" className="absolute inset-0 w-full h-full" />
       </motion.div>
 
       {/* Green bar (2nd block) */}
@@ -220,7 +220,7 @@ function BluePill({ animDelay = 0 }: { animDelay?: number }) {
       >
         <div className="w-full h-full relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/hero-chara-2.svg" alt="" className="absolute inset-0 w-full h-full object-contain" />
+          <img src="/assets/home/hero-chara-2.svg" alt="" className="absolute inset-0 w-full h-full object-contain" />
         </div>
       </motion.div>
 
@@ -238,7 +238,7 @@ function BluePill({ animDelay = 0 }: { animDelay?: number }) {
         <div className="flex-none -rotate-8">
           <div className="relative overflow-hidden" style={{ width: 81.21, height: 58.88 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-graphic-2-1.svg" alt="" className="absolute inset-0 w-full h-full" />
+            <img src="/assets/home/hero-graphic-2-1.svg" alt="" className="absolute inset-0 w-full h-full" />
           </div>
         </div>
       </motion.div>
@@ -256,7 +256,7 @@ function BluePill({ animDelay = 0 }: { animDelay?: number }) {
       >
         <div className="-rotate-8 flex-none w-full h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/hero-graphic-2-3.svg" alt="" className="w-full h-full" />
+          <img src="/assets/home/hero-graphic-2-3.svg" alt="" className="w-full h-full" />
         </div>
       </motion.div>
 
@@ -273,7 +273,7 @@ function BluePill({ animDelay = 0 }: { animDelay?: number }) {
       >
         <div className="-rotate-8 flex-none w-full h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/assets/hero-graphic-2-2.svg" alt="" className="w-full h-full" />
+          <img src="/assets/home/hero-graphic-2-2.svg" alt="" className="w-full h-full" />
         </div>
       </motion.div>
     </div>
@@ -314,7 +314,7 @@ function GreenPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-graphic-3-2.svg" alt="" className="w-full h-full" />
+        <img src="/assets/home/hero-graphic-3-2.svg" alt="" className="w-full h-full" />
       </motion.div>
 
       {/* Animated line: 3 subpaths trimmed sequentially L→R */}
@@ -370,7 +370,7 @@ function GreenPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-chara-4.svg" alt="" className="absolute inset-0 w-full h-full" />
+        <img src="/assets/home/hero-chara-4.svg" alt="" className="absolute inset-0 w-full h-full" />
       </motion.div>
 
       {/* Left character */}
@@ -385,7 +385,7 @@ function GreenPill({ animDelay = 0 }: { animDelay?: number }) {
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/hero-chara-3.svg" alt="" className="absolute inset-0 w-full h-full" />
+        <img src="/assets/home/hero-chara-3.svg" alt="" className="absolute inset-0 w-full h-full" />
       </motion.div>
     </div>
   );

@@ -110,7 +110,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/history-hero.jpg" alt="문화사가 걸어온 길" fill className="object-cover" priority />
+          <Image src="/assets/history/history-hero.jpg" alt="문화사가 걸어온 길" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.3)]" />
         </motion.div>
 
@@ -391,7 +391,7 @@ function HistorySection() {
 
 export default function HistoryPage() {
   return (
-    <div className="relative flex flex-col items-start overflow-x-hidden bg-[var(--bg-white)]">
+    <div className="relative flex flex-col items-start overflow-x-clip bg-[var(--bg-white)]">
       <GNB />
       <main className="flex flex-col w-full">
         <Hero />

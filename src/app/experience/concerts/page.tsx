@@ -17,7 +17,7 @@ type Program = {
 
 const OPEN_PROGRAMS: Program[] = [
   {
-    img: "/assets/concerts-program-1.png",
+    img: "/assets/concerts/concerts-program-1.png",
     title: "함께 체험하고 즐기는 키즈콘서트",
     details: [
       { label: "대상", value: "7세 이상 자유" },
@@ -141,7 +141,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/concerts-list-hero.png" alt="공연/행사" fill className="object-cover" priority />
+          <Image src="/assets/concerts/concerts-list-hero.png" alt="공연/행사" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
         </motion.div>
 

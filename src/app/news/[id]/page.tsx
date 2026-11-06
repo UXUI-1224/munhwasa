@@ -10,7 +10,7 @@ const POSTS: Record<string, { category: string; title: string; date: string; vie
     title: "문화사 홈페이지가 오픈했습니다.",
     date: "2026.11.05",
     views: 1,
-    img: "/assets/board-detail-hero.png",
+    img: "/assets/activity/board-detail-hero.png",
     body: [
       "안녕하세요, 문화사입니다.",
       "문화사 공식 홈페이지가 오픈하였습니다.",

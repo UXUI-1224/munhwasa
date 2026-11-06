@@ -50,14 +50,14 @@ const NEWS_DATA: NewsCardProps[] = [
     category: "현장소식",
     title: "영유아 교육 현장",
     date: "2026.10.21",
-    imgSrc: "/assets/news-image-1.png",
+    imgSrc: "/assets/activity/news-image-1.png",
     href: "/activity/1",
   },
   {
     category: "보도자료",
     title: "2026년 하반기 원장 초청 설명회",
     date: "2026.10.21",
-    imgSrc: "/assets/news-image-2.png",
+    imgSrc: "/assets/activity/news-image-2.png",
     href: "/activity/2",
   }
 ];

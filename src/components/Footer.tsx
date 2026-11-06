@@ -8,7 +8,7 @@ export default function Footer() {
       {/* Top: Logo */}
       <div className="flex items-start w-full">
         <Image
-          src="/assets/logo-vertical-white.svg"
+          src="/assets/logos/logo-vertical-white.svg"
           alt="문화사"
           width={115}
           height={52}

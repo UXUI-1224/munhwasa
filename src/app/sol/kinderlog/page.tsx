@@ -109,7 +109,7 @@ function Hero() {
           className="absolute overflow-hidden"
           style={{ top: imageTop, left: imageSide, right: imageSide, bottom: "0px", borderRadius: imageBR }}
         >
-          <Image src="/assets/kinderlog-hero.png" alt="킨더로그" fill className="object-cover" priority />
+          <Image src="/assets/kinderlog/kinderlog-hero.png" alt="킨더로그" fill className="object-cover" priority />
           <div className="absolute inset-0 bg-[rgba(32,32,32,0.4)]" />
         </motion.div>
 
@@ -214,7 +214,7 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
                   viewport={{ once: true }}
                   transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  <Image src="/assets/sol-step-bullet.svg" alt="" fill />
+                  <Image src="/assets/sol/sol-step-bullet.svg" alt="" fill />
                 </motion.div>
               </div>
               <div className="flex-1 flex flex-col gap-6">
@@ -256,7 +256,7 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
               >
-                <Image src="/assets/sol-step-bullet.svg" alt="" fill />
+                <Image src="/assets/sol/sol-step-bullet.svg" alt="" fill />
               </motion.div>
             </div>
 
@@ -292,19 +292,19 @@ function StepSection({ title, steps }: { title: string; steps: Step[] }) {
 
 const KINDERLOG_FEATURES = [
   {
-    icon: "/assets/kinderlog-feature-1.svg",
+    icon: "/assets/kinderlog/kinderlog-feature-1.svg",
     w: 83, h: 60,
     title: "AI 카메라 설치",
     desc: ["아이 눈높이에 맞춰", "원 안에 카메라를 설치합니다."],
   },
   {
-    icon: "/assets/kinderlog-feature-2.svg",
+    icon: "/assets/kinderlog/kinderlog-feature-2.svg",
     w: 80, h: 60,
     title: "원 안에서 분석",
     desc: ["영상을 밖으로 보내지 않아", "회선 공사가 필요 없습니다."],
   },
   {
-    icon: "/assets/kinderlog-feature-3.svg",
+    icon: "/assets/kinderlog/kinderlog-feature-3.svg",
     w: 86, h: 60,
     title: "영상 자동 삭제",
     desc: ["분석이 끝나면 영상은 지우고", "글·사진, 데이터만 남깁니다."],
@@ -324,9 +324,9 @@ const KINDERLOG_BENEFITS = [
     desc: "행정 업무는 AI 초안으로, 시간은 아이에게",
     graphic: (
       <div className="relative" style={{ width: 96, height: 110 }}>
-        <Image src="/assets/kinderlog-benefit-teacher.svg" alt="" fill />
+        <Image src="/assets/kinderlog/kinderlog-benefit-teacher.svg" alt="" fill />
         <div className="absolute" style={{ left: 59, top: 71, width: 46, height: 46, transform: "rotate(-3.83deg)" }}>
-          <Image src="/assets/kinderlog-clock.svg" alt="" fill />
+          <Image src="/assets/kinderlog/kinderlog-clock.svg" alt="" fill />
         </div>
       </div>
     ),
@@ -336,7 +336,7 @@ const KINDERLOG_BENEFITS = [
     desc: "반별·아이별 기록이 데이터로, 운영을 한눈에",
     graphic: (
       <div className="relative" style={{ width: 127, height: 115 }}>
-        <Image src="/assets/kinderlog-benefit-principal.svg" alt="" fill />
+        <Image src="/assets/kinderlog/kinderlog-benefit-principal.svg" alt="" fill />
       </div>
     ),
   },
@@ -345,7 +345,7 @@ const KINDERLOG_BENEFITS = [
     desc: "오늘의 하루는 알림장·사진, 성장은 리포트로",
     graphic: (
       <div className="relative" style={{ width: 123, height: 119 }}>
-        <Image src="/assets/kinderlog-benefit-parent.svg" alt="" fill />
+        <Image src="/assets/kinderlog/kinderlog-benefit-parent.svg" alt="" fill />
       </div>
     ),
   },
@@ -418,7 +418,7 @@ export default function KinderlogPage() {
                   <p className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-caption)]">기록이 가벼워지면,</p>
                   <p className="text-[16px] font-semibold leading-[1.4] tracking-[-0.04em] text-[var(--txt-caption)]">원의 하루가 달라져요!</p>
                   <div className="absolute -bottom-3 left-9 w-[21px] h-3.5">
-                    <Image src="/assets/kinderlog-balloon-arrow.svg" alt="" fill />
+                    <Image src="/assets/kinderlog/kinderlog-balloon-arrow.svg" alt="" fill />
                   </div>
                 </div>
                 {/* Mascot */}
@@ -429,7 +429,7 @@ export default function KinderlogPage() {
                   viewport={{ once: true }}
                   transition={{ type: "spring", stiffness: 240, damping: 12, delay: 0.1 }}
                 >
-                  <Image src="/assets/kinderlog-mascot.svg" alt="" fill className="scale-x-[-1]" />
+                  <Image src="/assets/kinderlog/kinderlog-mascot.svg" alt="" fill className="scale-x-[-1]" />
                 </motion.div>
               </div>
             </div>
@@ -469,7 +469,7 @@ export default function KinderlogPage() {
           className="relative w-full px-[40px] py-16 md:py-[120px] flex flex-col items-center justify-center gap-6 text-center overflow-hidden"
           style={{ background: "linear-gradient(90deg, #3D1B08 0%, #0957C8 100%)" }}
         >
-          <Image src="/assets/sol-banner-bg.svg" alt="" fill className="object-cover pointer-events-none" />
+          <Image src="/assets/sol/sol-banner-bg.svg" alt="" fill className="object-cover pointer-events-none" />
           <h2 className="text-[24px] md:text-[48px] font-semibold leading-[1.2] tracking-[-0.06em] text-[var(--txt-white)] px-6">
             킨더로그를 통해<br />스마트하게 운영하세요
           </h2>

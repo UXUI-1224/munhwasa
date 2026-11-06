@@ -12,7 +12,7 @@ const PROGRAM = {
   category: "공연/행사",
   title: "함께 체험하고 즐기는 키즈콘서트",
   views: 186,
-  img: "/assets/concerts-program-1.png",
+  img: "/assets/concerts/concerts-program-1.png",
   details: [
     { label: "대상", value: "7세 이상 자유" },
     { label: "운영시간", value: "16:00 ~ 18:00" },
@@ -39,7 +39,7 @@ export default function ConcertsProgramPage() {
         <div className="absolute inset-0 bg-[#2a1e18]" />
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/assets/concerts-program-1.png"
+            src="/assets/concerts/concerts-program-1.png"
             alt=""
             fill
             className="object-cover object-center opacity-20"

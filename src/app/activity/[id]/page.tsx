@@ -13,7 +13,7 @@ const POSTS: Record<
     title: "영유아 교육 현장",
     date: "2026.10.21",
     views: 24,
-    image: "/assets/activity-news-1.png",
+    image: "/assets/activity/activity-news-1.png",
     body: [
       "문화사가 함께한 영유아 교육 현장의 소중한 순간을 담았습니다.",
       "아이들의 밝은 웃음 속에서 배움이 놀이가 되고, 놀이가 배움이 되는 특별한 시간이었습니다. 문화사는 앞으로도 현장의 목소리에 귀 기울이며 더 나은 교육 환경을 만들어 나가겠습니다.",
@@ -24,7 +24,7 @@ const POSTS: Record<
     title: "2026년 하반기 원장 초청 설명회",
     date: "2026.10.21",
     views: 48,
-    image: "/assets/activity-news-2.png",
+    image: "/assets/activity/activity-news-2.png",
     body: [
       "2026년 하반기 원장 초청 설명회가 성황리에 개최되었습니다.",
       "전국 각지에서 모인 원장님들과 함께 AI 기반 행동관찰 솔루션 킨더로그와 최신 교육 트렌드를 공유하는 뜻깊은 자리였습니다. 현장의 귀한 의견을 바탕으로 더욱 발전된 서비스로 보답하겠습니다.",

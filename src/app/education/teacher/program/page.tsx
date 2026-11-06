@@ -12,7 +12,7 @@ const PROGRAM = {
   category: "교육/코칭",
   title: "2027년 유아 교육 코칭",
   views: 312,
-  img: "/assets/education-program-1.png",
+  img: "/assets/education/education-program-1.png",
   details: [
     { label: "대상", value: "신규 어린이집 교사" },
     { label: "목적", value: "2027년 유아 교육 코칭" },
@@ -39,7 +39,7 @@ export default function TeacherProgramPage() {
         <div className="absolute inset-0 bg-[#2a1e18]" />
         <div className="absolute inset-0 overflow-hidden">
           <Image
-            src="/assets/education-program-1.png"
+            src="/assets/education/education-program-1.png"
             alt=""
             fill
             className="object-cover object-center opacity-20"

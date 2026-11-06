@@ -124,7 +124,7 @@ export default function GNB() {
           {/* Logo — left */}
           <Link href="/">
             <Image
-              src="/assets/logo-horizontal.svg"
+              src="/assets/logos/logo-horizontal.svg"
               alt="문화사"
               width={150}
               height={19}
@@ -148,7 +148,7 @@ export default function GNB() {
           {/* Logo */}
           <Link href="/">
             <Image
-              src="/assets/logo-horizontal.svg"
+              src="/assets/logos/logo-horizontal.svg"
               alt="문화사"
               width={190}
               height={24}
@@ -232,7 +232,7 @@ export default function GNB() {
           <div className="flex items-center justify-between px-6 py-4">
             <Link href="/" onClick={() => setMobileMenuOpen(false)}>
               <Image
-                src="/assets/logo-horizontal.svg"
+                src="/assets/logos/logo-horizontal.svg"
                 alt="문화사"
                 width={150}
                 height={19}

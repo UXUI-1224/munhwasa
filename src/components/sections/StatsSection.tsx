@@ -97,8 +97,8 @@ export default function StatsSection() {
         {/* Stats grid */}
         <div className="relative flex flex-col gap-4 md:gap-6 w-full md:w-[1068px] md:shrink-0">
           {/* Decorative asterisks — desktop only */}
-          <Image src="/assets/stats-graphic-1.svg" alt="" width={80} height={89} className="absolute pointer-events-none hidden md:block" style={{ right: -100, top: -45 }} />
-          <Image src="/assets/stats-graphic-1.svg" alt="" width={80} height={89} className="absolute pointer-events-none hidden md:block" style={{ left: -100, bottom: -44 }} />
+          <Image src="/assets/home/stats-graphic-1.svg" alt="" width={80} height={89} className="absolute pointer-events-none hidden md:block" style={{ right: -100, top: -45 }} />
+          <Image src="/assets/home/stats-graphic-1.svg" alt="" width={80} height={89} className="absolute pointer-events-none hidden md:block" style={{ left: -100, bottom: -44 }} />
 
           {/* Row 1: two large cards */}
           <div className="flex flex-col md:flex-row gap-4 md:gap-6">
@@ -107,7 +107,7 @@ export default function StatsSection() {
               unit="개+"
               title="함께 하는 교육기관"
               desc={["전국 유치원·어린이집과 함께하는", "파트너 네트워크"]}
-              imgSrc="/assets/stats-icon-1.svg"
+              imgSrc="/assets/home/stats-icon-1.svg"
               imgWidth={180}
               imgHeight={172}
               size="large"
@@ -118,7 +118,7 @@ export default function StatsSection() {
               unit="개"
               title="전국 권역 네트워크"
               desc={["전국 권역 지사 운영 및", "영업 파트너 네트워크"]}
-              imgSrc="/assets/stats-icon-2.svg"
+              imgSrc="/assets/home/stats-icon-2.svg"
               imgWidth={170}
               imgHeight={171}
               size="large"

@@ -94,7 +94,7 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-1.svg" alt="" width={180} height={180} />
+        <Image src="/assets/home/character-1.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
@@ -112,7 +112,7 @@ const CARDS: CardData[] = [
         variants={charVariantsFlipped}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-2.svg" alt="" width={180} height={180} />
+        <Image src="/assets/home/character-2.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
@@ -130,7 +130,7 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-3.svg" alt="" width={180} height={180} />
+        <Image src="/assets/home/character-3.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
@@ -148,7 +148,7 @@ const CARDS: CardData[] = [
         variants={charVariants}
         transition={{ duration: 0.35, ease }}
       >
-        <Image src="/assets/character-4.svg" alt="" width={180} height={180} />
+        <Image src="/assets/home/character-4.svg" alt="" width={180} height={180} />
       </motion.div>
     ),
   },
