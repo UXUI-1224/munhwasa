@@ -79,7 +79,7 @@ function StatCard({
 export default function StatsSection() {
   return (
     <section className="relative w-full bg-[var(--blue-050)] py-[160px] overflow-hidden">
-      <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-[40px] md:gap-[80px]">
+      <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col md:flex-row gap-[40px] md:gap-[80px]">
 
         {/* Left title */}
         <div className="w-[342px] shrink-0 flex flex-col items-start">
