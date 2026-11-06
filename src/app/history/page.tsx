@@ -146,7 +146,7 @@ function Hero() {
 
 // ─── History Section ──────────────────────────────────────────────────────────
 
-type Decade = "2020s" | "2000s";
+type Decade = "2020s" | "2010s" | "2000s";
 
 type HistoryEntry = {
   year: string;
@@ -170,6 +170,31 @@ const HISTORY: Record<Decade, HistoryEntry[]> = {
       ],
     },
   ],
+  "2010s": [
+    {
+      year: "2019",
+      items: ["영유아 행동관찰 솔루션 프로토타입 개발 착수"],
+    },
+    {
+      year: "2016",
+      items: [
+        "전국 교사 역량 강화 코칭 프로그램 론칭",
+        "원장·부모 대상 양육 코칭 과정 개설",
+      ],
+    },
+    {
+      year: "2013",
+      items: [
+        "영유아 교육 교구 연구·개발 센터 설립",
+        "전국 10개 권역 파트너 네트워크 구축",
+        "사회정서학습(SEL) 기반 프로그램 연구 시작",
+      ],
+    },
+    {
+      year: "2010",
+      items: ["영유아 교육 전문 기업으로 사업 영역 확장"],
+    },
+  ],
   "2000s": [
     { year: "2004", items: ["문화사 출범"] },
   ],
@@ -177,6 +202,7 @@ const HISTORY: Record<Decade, HistoryEntry[]> = {
 
 const DECADE_LABELS: { key: Decade; label: string }[] = [
   { key: "2020s", label: "2020's" },
+  { key: "2010s", label: "2010's" },
   { key: "2000s", label: "2000's" },
 ];
 
@@ -184,7 +210,7 @@ function HistorySection() {
   const [activeDecade, setActiveDecade] = useState<Decade>("2020s");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [trackHeight, setTrackHeight] = useState(200);
-  const decadeRefs = useRef<Record<Decade, HTMLDivElement | null>>({ "2020s": null, "2000s": null });
+  const decadeRefs = useRef<Record<Decade, HTMLDivElement | null>>({ "2020s": null, "2010s": null, "2000s": null });
   const suppressScrollUpdate = useRef(false);
 
   // Compute absolute page positions once on mount, then derive scroll progress
@@ -205,11 +231,17 @@ function HistorySection() {
     };
 
     const updateActive = () => {
-      // Suppress during smooth-scroll from tab click to avoid flicker
       if (suppressScrollUpdate.current) return;
-      // 2000's becomes active when its heading reaches within 160px of viewport top
       const r2000 = el2000.getBoundingClientRect();
-      setActiveDecade(r2000.top <= 160 ? "2000s" : "2020s");
+      const el2010 = decadeRefs.current["2010s"];
+      const r2010 = el2010?.getBoundingClientRect();
+      if (r2000.top <= 160) {
+        setActiveDecade("2000s");
+      } else if (r2010 && r2010.top <= 160) {
+        setActiveDecade("2010s");
+      } else {
+        setActiveDecade("2020s");
+      }
     };
 
     const onScroll = () => { update(); updateActive(); };
@@ -238,7 +270,7 @@ function HistorySection() {
   const bulletTop = scrollProgress * (trackHeight - 24);
 
   return (
-    <section className="w-full bg-white py-16 md:py-24">
+    <section className="w-full bg-[var(--bg-white)] py-16 md:py-24">
       <div className="max-w-[1440px] mx-auto w-full px-6 flex flex-col gap-12 md:gap-20">
         {/* Header */}
         <div className="flex flex-col gap-6 items-center text-center">
@@ -265,7 +297,7 @@ function HistorySection() {
         {/* Content: Tabs + Scroll indicator + Timeline */}
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-start">
           {/* Tab column — sticky, z-[60] beats GNB z-50 so sub-menu doesn't swallow clicks */}
-          <div className="sticky top-24 flex flex-row md:flex-col gap-3 shrink-0 md:z-[60]">
+          <div className="sticky top-24 flex flex-row md:flex-col gap-3 shrink-0 z-[40]">
             {DECADE_LABELS.map(({ key, label }) => (
               <button
                 type="button"
@@ -345,7 +377,7 @@ function HistorySection() {
                     ))}
                   </div>
                 </div>
-                {key !== "2000s" && <div className="mt-12 md:mt-16 w-full h-px bg-[#E8E8E8]" />}
+                {key !== DECADE_LABELS[DECADE_LABELS.length - 1].key && <div className="mt-12 md:mt-16 w-full h-px bg-[#E8E8E8]" />}
               </div>
             ))}
           </div>
