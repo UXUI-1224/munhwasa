@@ -246,7 +246,7 @@ function ProgramCard({ program, delay }: { program: Program; delay: number }) {
             </div>
           </div>
           <div className="flex items-center gap-1 text-[16px] font-semibold leading-[1.2] tracking-[-0.04em] text-[var(--txt-label)]">
-            자세히 보기
+            신청하기
             <svg
               className="transition-transform duration-200 group-hover:translate-x-1.5"
               width="20" height="20" viewBox="0 0 20 20" fill="none"
