@@ -116,7 +116,7 @@ export default function NewsSection() {
   }
   
   return (
-    <section className="w-full bg-[var(--bg-gray)] py-[120px] overflow-hidden">
+    <section className="w-full bg-[var(--gray-050)] py-[120px] overflow-hidden">
       <div ref={containerRef} className="max-w-[1440px] mx-auto w-full flex flex-col gap-[80px]">
         {/* Header */}
         <div className="flex flex-col gap-4 w-full px-6">

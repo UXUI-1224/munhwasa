@@ -222,7 +222,7 @@ export default function GNB() {
       {mobileMenuOpen && (
         <motion.div
           key="mobile-drawer"
-          className="fixed inset-0 z-[60] bg-white flex flex-col md:hidden"
+          className="fixed inset-0 z-[60] bg-[var(--bg-gray)] flex flex-col md:hidden"
           initial={{ x: "100%" }}
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
