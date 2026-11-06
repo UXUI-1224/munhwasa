@@ -867,7 +867,7 @@ export default function HiforestPage() {
                     alt=""
                     width={118}
                     height={120}
-                    style={{ transform: "scaleX(-1)" }}
+                    style={{ transform: "none" }}
                   />
                 </motion.div>
               </div>
