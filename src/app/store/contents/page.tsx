@@ -154,31 +154,13 @@ export default function StoreContents() {
             className="absolute"
             style={{ top: 179, left: 382, width: 162, height: 170, transform: "rotate(-4deg)" }}
           />
-          {/* Orange circle + face — right */}
-          <div
+          {/* Orange character — right */}
+          <img
+            src="/assets/store-edu-char04.png"
+            alt=""
             className="absolute"
-            style={{ top: 45, right: 0, width: 170, height: 170, transform: "rotate(4deg)" }}
-          >
-            <img src="/assets/store-edu-ellipse.svg" alt="" className="w-full h-full" />
-            <img
-              src="/assets/store-edu-group.svg"
-              alt=""
-              className="absolute"
-              style={{ top: "27%", left: "15%", width: "30%" }}
-            />
-            <img
-              src="/assets/store-edu-group1.svg"
-              alt=""
-              className="absolute"
-              style={{ top: "28%", left: "11%", width: "30%" }}
-            />
-            <img
-              src="/assets/store-edu-text.svg"
-              alt=""
-              className="absolute"
-              style={{ bottom: "12%", left: "50%", transform: "translateX(-50%)", width: "50%" }}
-            />
-          </div>
+            style={{ top: 45, right: 0, width: 170, height: 170, transform: "rotate(4deg)", objectFit: "contain" }}
+          />
         </motion.div>
         </div>
       </section>
