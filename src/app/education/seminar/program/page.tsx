@@ -72,7 +72,6 @@ export default function SeminarProgramPage() {
         {/* Meta */}
         <div className="flex gap-[10px] items-center text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--txt-black)]">
           <span>{PROGRAM.date}</span>
-          <span>조회수 {PROGRAM.views}</span>
         </div>
 
         {/* Main image */}

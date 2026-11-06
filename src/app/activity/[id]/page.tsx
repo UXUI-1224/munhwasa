@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ViewCounter } from "@/components/ViewCounter";
 
 const POSTS: Record<
   string,
@@ -91,8 +90,6 @@ export default async function ActivityDetailPage({ params }: { params: Promise<{
             {/* Metadata */}
             <div className="flex gap-[10px] items-center text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--txt-display)]">
               <span>{post.date}</span>
-              <span className="w-px h-3 bg-[#D4D4D4]" />
-              <ViewCounter storageKey={`views-activity-${id}`} initialViews={post.views} />
             </div>
 
             {/* Content image */}

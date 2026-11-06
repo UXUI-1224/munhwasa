@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ViewCounter } from "@/components/ViewCounter";
 
 const POSTS: Record<string, { category: string; title: string; date: string; views: number; body: string[] }> = {
   "1": {
@@ -78,8 +77,6 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
             {/* Metadata */}
             <div className="flex gap-[10px] items-center text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[var(--txt-display)]">
               <span>{post.date}</span>
-              <span className="w-px h-3 bg-[#D4D4D4]" />
-              <ViewCounter storageKey={`views-news-${id}`} initialViews={post.views} />
             </div>
 
             {/* Body text */}

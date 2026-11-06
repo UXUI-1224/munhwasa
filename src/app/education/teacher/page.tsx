@@ -234,7 +234,7 @@ function ProgramCard({ program, delay }: { program: Program; delay: number }) {
         variants={cardItem}
         custom={delay}
       >
-        <div className="relative aspect-[3/4] rounded-[16px] overflow-hidden">
+        <div className="relative aspect-[4/3] rounded-[16px] overflow-hidden">
           <Image src={program.img} alt={program.title} fill className="object-cover" />
         </div>
         <div className="flex flex-col gap-10">
