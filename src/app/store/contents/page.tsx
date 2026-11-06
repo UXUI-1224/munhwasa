@@ -156,7 +156,7 @@ export default function StoreContents() {
           />
           {/* Orange character — right */}
           <img
-            src="/assets/store-edu-char04.png"
+            src="/assets/store-edu-char-04.svg"
             alt=""
             className="absolute"
             style={{ top: 45, right: 0, width: 170, height: 170, transform: "rotate(4deg)", objectFit: "contain" }}
