@@ -195,7 +195,7 @@ export default function GNB() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: [0.4, 0, 0.2, 1] }}
-            className="w-full bg-[var(--bg-secondary-softer)]"
+            className="w-full bg-[var(--bg-gray)]"
           >
             <div className="max-w-[1440px] mx-auto w-full flex items-center justify-center h-[73px]">
               {(MENU[activeNav] ?? []).map((sub) => {
