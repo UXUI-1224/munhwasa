@@ -451,7 +451,7 @@ function ContactContent() {
               <button
                 type="button"
                 onClick={() => setActiveTab("institution")}
-                className={`flex items-center px-5 py-3 md:px-6 md:py-4 rounded-full text-[16px] md:text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors bg-[var(--bg-primary)] text-white ${
+                className={`flex items-center px-5 py-3 md:px-6 md:py-4 rounded-full text-[16px] md:text-[20px] font-semibold leading-[1.2] tracking-[-0.04em] text-left transition-colors ${
                   activeTab === "institution"
                     ? "bg-[var(--bg-primary)] text-white"
                     : "border border-[#D4D4D4] text-[#D4D4D4] hover:border-[var(--bg-primary)] hover:text-[var(--bg-primary)]"
