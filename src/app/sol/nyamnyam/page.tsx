@@ -185,7 +185,7 @@ type Step = { title: string; desc: string | string[] };
 
 function StepSection({ title, steps }: { title: string; steps: Step[] }) {
   return (
-    <div className="relative" style={{ height: "40vh" }}>
+    <div className="relative" style={{ height: "50vh" }}>
       <section
         className="bg-[var(--bg-gray)] w-full flex flex-col justify-center"
         style={{ position: "absolute", inset: 0 }}

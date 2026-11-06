@@ -46,38 +46,24 @@ export default async function ActivityDetailPage({ params }: { params: Promise<{
       <GNB />
       <main className="flex flex-col w-full">
         {/* Dark Hero Section */}
-        <section className="relative w-full overflow-hidden" style={{ height: "450px" }}>
+        <section className="relative w-full h-[450px] flex items-center justify-center overflow-hidden pt-[64px]">
           <div className="absolute inset-0 bg-[#2a1e18]" />
-          <div
-            className="absolute overflow-hidden"
-            style={{
-              left: "30.88%",
-              width: "38.28%",
-              height: "120.29%",
-              top: "-10.25%",
-            }}
-          >
+          <div className="absolute inset-0 overflow-hidden">
             <Image
-              src="/assets/board-detail-hero.png"
+              src={post.image}
               alt=""
               fill
-              className="object-cover"
+              className="object-cover object-center opacity-20"
               priority
             />
           </div>
-          <div className="absolute inset-0 bg-[rgba(0,0,0,0.6)]" />
+          <div className="absolute inset-0 bg-[rgba(0,0,0,0.55)]" />
 
-          {/* Centered text */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pb-5">
+          <div className="relative z-10 flex flex-col items-center gap-3 pb-5">
             <p className="text-[14px] font-normal leading-[1.2] tracking-[-0.02em] text-[#E8E8E8]">
               {post.category}
             </p>
-            <Image
-              src="/assets/board-detail-border.svg"
-              alt=""
-              width={36}
-              height={2}
-            />
+            <div className="w-9 h-[1px] bg-[#E8E8E8] opacity-60" />
             <p className="text-[24px] font-semibold leading-[1.3] tracking-[-0.06em] text-[#E8E8E8] text-center px-6">
               {post.title}
             </p>
